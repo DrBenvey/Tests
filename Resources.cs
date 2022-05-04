@@ -6,30 +6,30 @@ namespace Tests
 {
     class Resources
     {
-        public List<string> ComboBox_test_choose_Options()
+        public List<string> ComboBox_Test_Choose_Options()
         {
             return new List<string> { 
                 "Тестирование по электрическим аппаратам" , 
                 "Тестирование по электрическим машинам и аппаратам" 
             };
         }
-        public string Get_TextBlock_test_choose_Value()
+        public string Get_TextBlock_Test_Choose_Value()
         {
-            return "Выберите тест для прохождения.\nДля этого нажмите на выпадающий список, расположенный ниже, и нажмите на интересующий Вас тест.";
+            return "Выберите тест для прохождения. Для этого нажмите на выпадающий список, расположенный ниже, и нажмите на интересующий Вас тест.";
         } 
-        public string Get_TextBlock_test_navidation_Value(string Test_Option)
+        public string Get_TextBlock_Test_Navidation_Value(string Test_Option)
         {
             return $"Вы выбрали \"{Test_Option}\".";
         }
-        public string TextBlock_test_time_Value(long _time)
+        public string TextBlock_Test_Time_Value(long _time)
         {
             return $"Потрачено времени на выполнение теста: {TimeSpan.FromSeconds(_time).ToString()}";
         }
-        public string Get_Window_test_choose_Value()
+        public string Get_Window_Test_Choose_Value()
         {
             return "Ввбор теста";
         }
-        public string Get_Window_test_bigin_Value()
+        public string Get_Window_Test_Bigin_Value()
         {
             return "Тестирование";
         }
@@ -59,6 +59,22 @@ namespace Tests
         public string Get_MessageBox_Restart_Value()
         {
             return "Вы уверены, что хотите начать этот тест с начала?\nВыбранные ответы не сохранятся.";
+        }
+        public string Get_TextBlock_Question_Info_One_Correct_Value()
+        {
+            return "Вы приступаете к разделу теста, содержащий вопросы, для которых верен только один из предложенных ответов. Укажите один верный ответ.";
+        }
+        public string Get_TextBlock_Question_Info_Some_Correct_Value()
+        {
+            return "Вы приступаете к разделу теста, содержащий вопросы, для которых верены несколько из предложенных ответов. Укажите все верные ответы.";
+        }
+        public string Get_TextBlock_Question_Info_Input_Word_Value()
+        {
+            return "Вы приступаете к разделу теста, содержащий вопросы, для ответа на которые нужно вставить в пропуски недостающие по смыслу слова (или словосочетания). Заполните пропуски словами (или словосочетаниями).";
+        }
+        public string Get_TextBlock_Question_Info_Drag_And_Drop_Value()
+        {
+            return "Вы приступаете к разделу теста, содержащий вопросы, для ответа на которые нужно сопоставить объекты. Перетените объекты из левого столбца к их парам в прамом.";
         }
     }
 }

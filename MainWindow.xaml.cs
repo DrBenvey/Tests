@@ -27,15 +27,13 @@ namespace Tests
             {
                 case "choose_content":
                     ScrollViewer_main.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
-                    ScrollViewer_main.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
                     StackPanel_test_choose.Visibility = Visibility.Visible;
                     StackPanel_main.Visibility = Visibility.Hidden;
                     break;
                 case "main_content":
-                    ScrollViewer_main.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-                    ScrollViewer_main.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+                    ScrollViewer_main.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;                    
                     StackPanel_test_choose.Visibility = Visibility.Hidden; 
-                    StackPanel_main.Visibility = Visibility.Visible;                    
+                    StackPanel_main.Visibility = Visibility.Visible;
                     break;
             }
         }
@@ -43,18 +41,26 @@ namespace Tests
         {
             _timer.Interval = new TimeSpan(0, 0, 1);
             _timer.Tick += new EventHandler(Timer_Tick);
-            TextBlock_test_choose.Text = _resources.Get_TextBlock_test_choose_Value();
+
+            ScrollViewer_main.HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled;
+
+            TextBlock_question_info_one_correct.Text = _resources.Get_TextBlock_Question_Info_One_Correct_Value();
+            TextBlock_test_choose.Text = _resources.Get_TextBlock_Test_Choose_Value();
             TextBlock_restart.Text = _resources.Get_TextBlock_Restart_Value();
             TextBlock_back.Text = _resources.Get_TextBlock_Back_Value();
             TextBlock_finish.Text = _resources.Get_TextBlock_Finish_Value();
-            List<string> test_choose_options = _resources.ComboBox_test_choose_Options();
+            TextBlock_question_info_some_correct.Text = _resources.Get_TextBlock_Question_Info_Some_Correct_Value();
+            TextBlock_question_info_input_word.Text = _resources.Get_TextBlock_Question_Info_Input_Word_Value();
+            TextBlock_question_info_drag_and_drop.Text = _resources.Get_TextBlock_Question_Info_Drag_And_Drop_Value();
+
+            List<string> test_choose_options = _resources.ComboBox_Test_Choose_Options();
             foreach (string test_choose_option in test_choose_options)
                 ComboBox_test_choose.Items.Add(test_choose_option);
         }
         public void Get_choose_content()
         {
             ComboBox_test_choose.SelectedItem = null;
-            Window.Title = _resources.Get_Window_test_choose_Value();
+            Window.Title = _resources.Get_Window_Test_Choose_Value();
             Navigation("choose_content");
         }
 
@@ -62,9 +68,9 @@ namespace Tests
         private void ComboBox_test_choose_Selected(object sender, RoutedEventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
-            TextBlock_test_navidation.Text = _resources.Get_TextBlock_test_navidation_Value((string)comboBox.SelectedItem);
+            TextBlock_test_navidation.Text = _resources.Get_TextBlock_Test_Navidation_Value((string)comboBox.SelectedItem);
             Navigation("main_content");
-            Window.Title = _resources.Get_Window_test_bigin_Value();
+            Window.Title = _resources.Get_Window_Test_Bigin_Value();
             Timer("start");
         }
 
@@ -131,7 +137,7 @@ namespace Tests
         private void Timer_Tick(object sender, EventArgs e)
         {
             _time++;
-            TextBlock_test_time.Text = _resources.TextBlock_test_time_Value(_time);           
+            TextBlock_test_time.Text = _resources.TextBlock_Test_Time_Value(_time);           
         }
         #endregion
     }
