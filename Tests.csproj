@@ -85,7 +85,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Tests.ico" />
+    <Resource Include="data\img\Tests.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\img\back.svg" />
+    <Content Include="data\img\check.svg" />
+    <Content Include="data\img\restart.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,9 +6,17 @@
         xmlns:local="clr-namespace:Tests"
         mc:Ignorable="d"
         WindowState="Maximized"
-        Icon="Tests.ico"
+        Icon="data\img\Tests.ico"
         Name="Window">
     <Window.Resources>
+        <Style x:Key="ButtonText" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Times New Roman"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="0,0,5,0"/>
+        </Style>
         <Style x:Key="NormalText" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Times New Roman"/>
             <Setter Property="FontSize" Value="20"/>
@@ -25,7 +33,7 @@
         <Style x:Key="NormalBorder" TargetType="Border">
             <Setter Property="CornerRadius" Value="6"/>
             <Setter Property="BorderBrush" Value="Gray"/>
-            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Background" Value="LightCyan"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="Margin" Value="0,10,0,10"/>
         </Style>
@@ -33,7 +41,7 @@
         <Style x:Key="NavidationBorder" TargetType="Border">
             <Setter Property="CornerRadius" Value="6"/>
             <Setter Property="BorderBrush" Value="Gray"/>
-            <Setter Property="Background" Value="LightCoral"/>
+            <Setter Property="Background" Value="LightCyan"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="Margin" Value="0,10,0,10"/>
         </Style>
@@ -46,21 +54,56 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
+
+        <Style x:Key="HorizontalPanel" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal"/>
+        </Style>
+
+        <Style x:Key="HorizontalButton" TargetType="Button">
+            <Setter Property="Margin" Value="0,0,20,0"/>
+        </Style>
+
+        <!--https://www.svgrepo.com/vectors/-->
+        <Path x:Key="IconRestart" x:Shared="False" Stretch="Uniform" Data="M 2.464844 1 L 4.152344 2.6875 C 2.835938 3.878906 2 5.589844 2 7.5 C 2 11.085938 4.914063 14 8.5 14 C 12.085938 14 15 11.085938 15 7.5 C 15 3.914063 12.085938 1 8.5 1 L 8 1 L 8 2 L 8.5 2 C 11.542969 2 14 4.457031 14 7.5 C 14 10.542969 11.542969 13 8.5 13 C 5.457031 13 3 10.542969 3 7.5 C 3 5.859375 3.722656 4.402344 4.859375 3.394531 L 6 4.535156 L 6 1 Z" Fill="Black" Stroke="Black"/>
+        <Path x:Key="IconBack" x:Shared="False" Stretch="Uniform" Data="M51.718,50.857l-1.341-2.252C40.075,31.295,25.975,32.357,22.524,32.917v13.642L0,23.995L22.524,1.644v13.43 c0.115,0,0.229-0.001,0.344-0.001c12.517,0,18.294,5.264,18.542,5.496c13.781,11.465,10.839,27.554,10.808,27.715L51.718,50.857z M25.505,30.735c5.799,0,16.479,1.923,24.993,14.345c0.128-4.872-0.896-15.095-10.41-23.012c-0.099-0.088-5.935-5.364-18.533-4.975 l-1.03,0.03V6.447L2.832,24.001l17.692,17.724V31.311l0.76-0.188C21.338,31.109,22.947,30.735,25.505,30.735z" Fill="Black" Stroke="Black"/>
+        <Path x:Key="IconFinish" x:Shared="False" Stretch="Uniform" Data="M474.045,173.813c-4.201,1.371-6.494,5.888-5.123,10.088c7.571,23.199,11.411,47.457,11.411,72.1 c0,62.014-24.149,120.315-68,164.166s-102.153,68-164.167,68s-120.316-24.149-164.167-68S16,318.014,16,256 S40.149,135.684,84,91.833s102.153-68,164.167-68c32.889,0,64.668,6.734,94.455,20.017c28.781,12.834,54.287,31.108,75.81,54.315 c3.004,3.239,8.066,3.431,11.306,0.425c3.24-3.004,3.43-8.065,0.426-11.306c-23-24.799-50.26-44.328-81.024-58.047 C317.287,15.035,283.316,7.833,248.167,7.833c-66.288,0-128.608,25.813-175.48,72.687C25.814,127.392,0,189.712,0,256 c0,66.287,25.814,128.607,72.687,175.479c46.872,46.873,109.192,72.687,175.48,72.687s128.608-25.813,175.48-72.687 c46.873-46.872,72.687-109.192,72.687-175.479c0-26.332-4.105-52.26-12.201-77.064 C482.762,174.736,478.245,172.445,474.045,173.813z M504.969,83.262c-4.532-4.538-10.563-7.037-16.98-7.037s-12.448,2.499-16.978,7.034l-7.161,7.161 c-3.124,3.124-3.124,8.189,0,11.313c3.124,3.123,8.19,3.124,11.314-0.001l7.164-7.164c1.51-1.512,3.52-2.344,5.66-2.344 s4.15,0.832,5.664,2.348c1.514,1.514,2.348,3.524,2.348,5.663s-0.834,4.149-2.348,5.663L217.802,381.75 c-1.51,1.512-3.52,2.344-5.66,2.344s-4.15-0.832-5.664-2.348L98.747,274.015c-1.514-1.514-2.348-3.524-2.348-5.663 c0-2.138,0.834-4.149,2.351-5.667c1.51-1.512,3.52-2.344,5.66-2.344s4.15,0.832,5.664,2.348l96.411,96.411 c1.5,1.5,3.535,2.343,5.657,2.343s4.157-0.843,5.657-2.343l234.849-234.849c3.125-3.125,3.125-8.189,0-11.314 c-3.124-3.123-8.189-3.123-11.313,0L212.142,342.129l-90.75-90.751c-4.533-4.538-10.563-7.037-16.98-7.037 s-12.448,2.499-16.978,7.034c-4.536,4.536-7.034,10.565-7.034,16.977c0,6.412,2.498,12.441,7.034,16.978l107.728,107.728 c4.532,4.538,10.563,7.037,16.98,7.037c6.417,0,12.448-2.499,16.977-7.033l275.847-275.848c4.536-4.536,7.034-10.565,7.034-16.978 S509.502,87.794,504.969,83.262z" Fill="Black" Stroke="Black"/>
         
     </Window.Resources>
     <Grid>
-
-        <StackPanel Style="{StaticResource NormalStackPanel}" Name="StackPanel_main">
-            <Border Style="{StaticResource NavidationBorder}" Name="Border_test_navidation">
-                <StackPanel Style="{StaticResource NormalStackPanel}">
-                    <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_test_navidation"/>
-                </StackPanel>
-            </Border>
-            <Border Style="{StaticResource NormalBorder}" >
-                <TextBlock Style="{StaticResource NormalText}" Text="sasffffffffffffffffffasfasfasfasffasf"/>
-            </Border>
-        </StackPanel>
-
+        <ScrollViewer Name="ScrollViewer_main" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <StackPanel Style="{StaticResource NormalStackPanel}" Name="StackPanel_main">
+                <Border Style="{StaticResource NavidationBorder}" Name="Border_test_navidation">
+                    <StackPanel Style="{StaticResource NormalStackPanel}">
+                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_test_navidation"/>
+                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_test_time"/>
+                        <StackPanel Style="{StaticResource HorizontalPanel}">
+                            <Button Style="{StaticResource HorizontalButton}" Click="Button_restart_Click">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource IconRestart}"/>
+                                    <TextBlock Style="{StaticResource ButtonText}" Name="TextBlock_restart"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource HorizontalButton}" Click="Button_back_Click">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource IconBack}"/>
+                                    <TextBlock Style="{StaticResource ButtonText}" Name="TextBlock_back"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource HorizontalButton}" Click="Button_finish_Click">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource IconFinish}"/>
+                                    <TextBlock Style="{StaticResource ButtonText}" Name="TextBlock_finish"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource NormalBorder}" >
+                    <TextBlock Style="{StaticResource NormalText}" Text="sasffffffffffffffffffasfasfasfasffasf"/>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+        
         <StackPanel Style="{StaticResource CenterStackPanel}" Name="StackPanel_test_choose">
             <Border Style="{StaticResource NormalBorder}" Name="Border_test_choose">
                 <StackPanel Style="{StaticResource NormalStackPanel}">
@@ -70,7 +113,6 @@
             </Border>
         </StackPanel>
 
-        
 
     </Grid>
 </Window>
