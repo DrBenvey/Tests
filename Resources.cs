@@ -6,12 +6,19 @@ namespace Tests
 {
     class Resources
     {
+        GetTests _getTests=new GetTests();
+        List<Test> tests;
+        public Resources()
+        {
+            tests= _getTests.GetResourcesTests();
+        }
+
         public List<string> ComboBox_Test_Choose_Options()
         {
-            return new List<string> { 
-                "Тестирование по электрическим аппаратам" , 
-                "Тестирование по электрическим машинам и аппаратам" 
-            };
+            List<string> options= new List<string>();
+            foreach (Test test in tests)
+                options.Add(test.Name);
+            return options;
         }
         public string Get_TextBlock_Test_Choose_Value()
         {

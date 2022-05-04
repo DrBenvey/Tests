@@ -46,6 +46,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GetTests.cs" />
     <Compile Include="Models.cs" />
     <Compile Include="Resources.cs" />
     <Page Include="MainWindow.xaml">
@@ -92,6 +93,9 @@
     <Content Include="data\img\back.svg" />
     <Content Include="data\img\check.svg" />
     <Content Include="data\img\restart.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="data\pic\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
