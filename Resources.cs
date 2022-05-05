@@ -13,6 +13,17 @@ namespace Tests
             tests= _getTests.GetResourcesTests();
         }
 
+        public Test GetTest(string Test_Option)
+        {
+            Test tmp=new Test();
+            foreach (Test test in tests)
+            {
+                if(test.Name == Test_Option)
+                    return test;
+            }
+            return tmp;
+        }
+
         public List<string> ComboBox_Test_Choose_Options()
         {
             List<string> options= new List<string>();
