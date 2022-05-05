@@ -8,6 +8,7 @@ namespace Tests
     {
         GetTests _getTests=new GetTests();
         List<Test> tests;
+        Test this_test;
         public Resources()
         {
             tests= _getTests.GetResourcesTests();
@@ -19,7 +20,11 @@ namespace Tests
             foreach (Test test in tests)
             {
                 if(test.Name == Test_Option)
+                {
+                    this_test=test;
                     return test;
+                }
+                    
             }
             return tmp;
         }
@@ -34,6 +39,10 @@ namespace Tests
         public string Get_TextBlock_Test_Choose_Value()
         {
             return "Выберите тест для прохождения. Для этого нажмите на выпадающий список, расположенный ниже, и нажмите на интересующий Вас тест.";
+        } 
+        public string Get_TextBlock_Test_Result_Value(int correct_answers)
+        {
+            return $"Поздравляем, тест завершен. Вы ответили правильно на {correct_answers} вопросов из {this_test.Drag_And_Drop_Questions.Count+ this_test.One_Correct_Questions.Count+ this_test.Some_Correct_Questions.Count+ this_test.Input_Word_Questions.Count}";
         } 
         public string Get_TextBlock_Test_Navidation_Value(string Test_Option)
         {

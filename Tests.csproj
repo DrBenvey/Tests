@@ -93,6 +93,7 @@
     <Content Include="data\img\back.svg" />
     <Content Include="data\img\check.svg" />
     <Content Include="data\img\restart.svg" />
+    <Resource Include="data\pic\демонстрационный_3_2.jpg" />
     <Resource Include="data\pic\демонстрационный_2_2.jpg" />
     <Resource Include="data\pic\демонстрационный_1_2.jpg" />
   </ItemGroup>

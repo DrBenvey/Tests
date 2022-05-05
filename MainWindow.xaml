@@ -25,6 +25,19 @@
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Margin" Value="0,0,0,10"/>
         </Style>
+        <Style x:Key="QuestionText" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Times New Roman"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="5,0,5,10"/>
+        </Style>
+        <Style x:Key="QuestionTextBox" TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Times New Roman"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="5,0,5,10"/>
+            <Setter Property="MinWidth" Value="50"/>
+        </Style>
         <Style x:Key="NormalComboBox" TargetType="ComboBox">
             <Setter Property="FontFamily" Value="Times New Roman"/>
             <Setter Property="FontSize" Value="20"/>
@@ -82,6 +95,8 @@
 
         <Style x:Key="Image" TargetType="Image">
             <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="MaxHeight" Value="600"/>
+            <Setter Property="MaxWidth" Value="800"/>
         </Style>
 
         <Style x:Key="HorizontalRadioButton" TargetType="RadioButton">
@@ -106,34 +121,43 @@
         
     </Window.Resources>
     <Grid>
-        <ScrollViewer Name="ScrollViewer_main">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Style="{StaticResource NormalStackPanel}" Name="StackPanel_test_navidation">
+            <Border Style="{StaticResource NavidationBorder}" Name="Border_test_navidation">
+                <StackPanel Style="{StaticResource NormalStackPanel}">
+                    <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_test_navidation"/>
+                    <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_test_time"/>
+                    <WrapPanel>
+                        <Button Style="{StaticResource HorizontalButton}" Name="Button_restart" Click="Button_restart_Click">
+                            <StackPanel Style="{StaticResource HorizontalPanel}">
+                                <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource IconRestart}"/>
+                                <TextBlock Style="{StaticResource ButtonText}" Name="TextBlock_restart"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource HorizontalButton}" Name="Button_back" Click="Button_back_Click">
+                            <StackPanel Style="{StaticResource HorizontalPanel}">
+                                <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource IconBack}"/>
+                                <TextBlock Style="{StaticResource ButtonText}" Name="TextBlock_back"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource HorizontalButton}" Name="Button_finish" Click="Button_finish_Click">
+                            <StackPanel Style="{StaticResource HorizontalPanel}">
+                                <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource IconFinish}"/>
+                                <TextBlock Style="{StaticResource ButtonText}" Name="TextBlock_finish"/>
+                            </StackPanel>
+                        </Button>
+                    </WrapPanel>
+                    <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_test_result"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" Name="ScrollViewer_main">
             <StackPanel Style="{StaticResource NormalStackPanel}" Name="StackPanel_main">
-                <Border Style="{StaticResource NavidationBorder}" Name="Border_test_navidation">
-                    <StackPanel Style="{StaticResource NormalStackPanel}">
-                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_test_navidation"/>
-                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_test_time"/>
-                        <WrapPanel>
-                            <Button Style="{StaticResource HorizontalButton}" Click="Button_restart_Click">
-                                <StackPanel Style="{StaticResource HorizontalPanel}">
-                                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource IconRestart}"/>
-                                    <TextBlock Style="{StaticResource ButtonText}" Name="TextBlock_restart"/>
-                                </StackPanel>
-                            </Button>
-                            <Button Style="{StaticResource HorizontalButton}" Click="Button_back_Click">
-                                <StackPanel Style="{StaticResource HorizontalPanel}">
-                                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource IconBack}"/>
-                                    <TextBlock Style="{StaticResource ButtonText}" Name="TextBlock_back"/>
-                                </StackPanel>
-                            </Button>
-                            <Button Style="{StaticResource HorizontalButton}" Click="Button_finish_Click">
-                                <StackPanel Style="{StaticResource HorizontalPanel}">
-                                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource IconFinish}"/>
-                                    <TextBlock Style="{StaticResource ButtonText}" Name="TextBlock_finish"/>
-                                </StackPanel>
-                            </Button>
-                        </WrapPanel>
-                    </StackPanel>
-                </Border>
                 <Border Style="{StaticResource InfoBorder}" Name="Border_question_info_one_correct">
                     <StackPanel Style="{StaticResource NormalStackPanel}">
                         <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_info_one_correct"/>
@@ -141,7 +165,7 @@
                 </Border>
                 <Border Style="{StaticResource QuestionBorder}" Name="Border_question_one_correct_1">
                     <StackPanel Style="{StaticResource NormalStackPanel}">
-                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_one_correct_1" />
+                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_one_correct_1_question" />
                         <WrapPanel>
                             <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct_1" Name="RadioButton_question_one_correct_1_answer_1"/>
                             <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct_1" Name="RadioButton_question_one_correct_1_answer_2"/>
@@ -152,8 +176,8 @@
                 </Border>
                 <Border Style="{StaticResource QuestionBorder}" Name="Border_question_one_correct_2">
                     <StackPanel Style="{StaticResource NormalStackPanel}">
-                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_one_correct_2" />
-                        <Image Style="{StaticResource Image}" Name="Image_question_one_correct_2" />
+                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_one_correct_2_question" />
+                        <Image Style="{StaticResource Image}" Name="Image_question_one_correct_2_image" />
                         <WrapPanel>
                             <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct_2" Name="RadioButton_question_one_correct_2_answer_1"/>
                             <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct_2" Name="RadioButton_question_one_correct_2_answer_2"/>
@@ -163,7 +187,7 @@
                         </WrapPanel>
                     </StackPanel>
                 </Border>
-                
+
                 <Border Style="{StaticResource InfoBorder}" Name="Border_question_info_some_correct">
                     <StackPanel Style="{StaticResource NormalStackPanel}">
                         <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_info_some_correct"/>
@@ -171,7 +195,7 @@
                 </Border>
                 <Border Style="{StaticResource QuestionBorder}" Name="Border_question_some_correct_1" >
                     <StackPanel Style="{StaticResource NormalStackPanel}">
-                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_some_correct_1"/>
+                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_some_correct_1_question"/>
                         <WrapPanel>
                             <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_1_answer_1"/>
                             <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_1_answer_2"/>
@@ -182,8 +206,8 @@
                 </Border>
                 <Border Style="{StaticResource QuestionBorder}" Name="Border_question_some_correct_2" >
                     <StackPanel Style="{StaticResource NormalStackPanel}">
-                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_some_correct_2"/>
-                        <Image Style="{StaticResource Image}" Name="Image_question_some_correct_2" />
+                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_some_correct_2_question"/>
+                        <Image Style="{StaticResource Image}" Name="Image_question_some_correct_2_image" />
                         <WrapPanel>
                             <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_2_answer_1"/>
                             <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_2_answer_2"/>
@@ -193,23 +217,35 @@
                         </WrapPanel>
                     </StackPanel>
                 </Border>
-                
-                <!--<Border Style="{StaticResource InfoBorder}" Name="Border_question_info_input_word">
+                <Border Style="{StaticResource InfoBorder}" Name="Border_question_info_input_word">
                     <StackPanel Style="{StaticResource NormalStackPanel}">
                         <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_info_input_word"/>
                     </StackPanel>
                 </Border>
-                <Border Style="{StaticResource QuestionBorder}" >
+                <Border Style="{StaticResource QuestionBorder}" Name="Border_question_input_word_1">
                     <StackPanel Style="{StaticResource NormalStackPanel}">
-                        <TextBlock Style="{StaticResource NormalText}" Text="3_1"/>
+                        <WrapPanel>
+                            <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_question_input_word_1_question_1"/>
+                            <TextBox Style="{StaticResource QuestionTextBox}" Name="TextBox_question_input_word_1_answer_1"/>
+                            <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_question_input_word_1_question_2"/>
+                        </WrapPanel>
                     </StackPanel>
                 </Border>
-                <Border Style="{StaticResource QuestionBorder}" >
+                <Border Style="{StaticResource QuestionBorder}" Name="Border_question_input_word_2">
                     <StackPanel Style="{StaticResource NormalStackPanel}">
-                        <TextBlock Style="{StaticResource NormalText}" Text="3_2"/>
+                        <WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_question_input_word_2_question_1"/>
+                                <TextBox Style="{StaticResource QuestionTextBox}" Name="TextBox_question_input_word_2_answer_1"/>
+                                <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_question_input_word_2_question_2"/>
+                                <TextBox Style="{StaticResource QuestionTextBox}" Name="TextBox_question_input_word_2_answer_2"/>
+                                <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_question_input_word_2_question_3"/>
+                            </WrapPanel>
+                        </WrapPanel>
+                        <Image Style="{StaticResource Image}" Name="Image_question_input_word_2_image" />
                     </StackPanel>
                 </Border>
-                <Border Style="{StaticResource InfoBorder}" Name="Border_question_info_drag_and_drop">
+                <!--<Border Style="{StaticResource InfoBorder}" Name="Border_question_info_drag_and_drop">
                     <StackPanel Style="{StaticResource NormalStackPanel}">
                         <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_info_drag_and_drop"/>
                     </StackPanel>
@@ -227,7 +263,7 @@
             </StackPanel>
         </ScrollViewer>
 
-        <StackPanel Style="{StaticResource CenterStackPanel}" Name="StackPanel_test_choose">
+        <StackPanel Grid.Row="1" Style="{StaticResource CenterStackPanel}" Name="StackPanel_test_choose">
             <Border Style="{StaticResource NormalBorder}" Name="Border_test_choose">
                 <StackPanel Style="{StaticResource NormalStackPanel}">
                     <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_test_choose"/>

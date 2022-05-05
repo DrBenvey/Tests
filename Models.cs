@@ -26,7 +26,10 @@ namespace Tests
     }
     class Input_Word
     {
-        //?
+        public List<string> Question { get; set; }
+        public string Picture { get; set; }
+        public List<string> Answer { get; set; }
+
     }
     class Drag_And_Drop
     {
