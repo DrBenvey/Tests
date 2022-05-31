@@ -125,7 +125,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-
+        <!--Верхняя навигационная панель-->
         <StackPanel Grid.Row="0" Style="{StaticResource NormalStackPanel}" Name="StackPanel_test_navidation">
             <Border Style="{StaticResource NavidationBorder}" Name="Border_test_navidation">
                 <StackPanel Style="{StaticResource NormalStackPanel}">
@@ -158,111 +158,86 @@
 
         <ScrollViewer Grid.Row="1" Name="ScrollViewer_main">
             <StackPanel Style="{StaticResource NormalStackPanel}" Name="StackPanel_main">
+                <!--Вопросы с одним верным вариантом ответа-->
                 <Border Style="{StaticResource InfoBorder}" Name="Border_question_info_one_correct">
                     <StackPanel Style="{StaticResource NormalStackPanel}">
                         <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_info_one_correct"/>
                     </StackPanel>
                 </Border>
-                <Border Style="{StaticResource QuestionBorder}" Name="Border_question_one_correct_1">
+                <Border Style="{StaticResource QuestionBorder}" Name="Border_question_one_correct">
                     <StackPanel Style="{StaticResource NormalStackPanel}">
-                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_one_correct_1_question" />
+                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_one_correct_question" />
+                        <Image Style="{StaticResource Image}" Name="Image_question_one_correct_image" />
                         <WrapPanel>
-                            <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct_1" Name="RadioButton_question_one_correct_1_answer_1"/>
-                            <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct_1" Name="RadioButton_question_one_correct_1_answer_2"/>
-                            <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct_1" Name="RadioButton_question_one_correct_1_answer_3"/>
-                            <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct_1" Name="RadioButton_question_one_correct_1_answer_4"/>
+                            <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct" Name="RadioButton_question_one_correct_answer_1"/>
+                            <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct" Name="RadioButton_question_one_correct_answer_2"/>
+                            <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct" Name="RadioButton_question_one_correct_answer_3"/>
+                            <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct" Name="RadioButton_question_one_correct_answer_4"/>
+                            <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct" Name="RadioButton_question_one_correct_answer_5"/>
                         </WrapPanel>
                     </StackPanel>
                 </Border>
-                <Border Style="{StaticResource QuestionBorder}" Name="Border_question_one_correct_2">
-                    <StackPanel Style="{StaticResource NormalStackPanel}">
-                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_one_correct_2_question" />
-                        <Image Style="{StaticResource Image}" Name="Image_question_one_correct_2_image" />
-                        <WrapPanel>
-                            <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct_2" Name="RadioButton_question_one_correct_2_answer_1"/>
-                            <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct_2" Name="RadioButton_question_one_correct_2_answer_2"/>
-                            <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct_2" Name="RadioButton_question_one_correct_2_answer_3"/>
-                            <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct_2" Name="RadioButton_question_one_correct_2_answer_4"/>
-                            <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct_2" Name="RadioButton_question_one_correct_2_answer_5"/>
-                        </WrapPanel>
-                    </StackPanel>
-                </Border>
-
+                <!--Вопросы с несколькими верным вариантами ответа-->
                 <Border Style="{StaticResource InfoBorder}" Name="Border_question_info_some_correct">
                     <StackPanel Style="{StaticResource NormalStackPanel}">
                         <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_info_some_correct"/>
                     </StackPanel>
                 </Border>
-                <Border Style="{StaticResource QuestionBorder}" Name="Border_question_some_correct_1" >
+                <Border Style="{StaticResource QuestionBorder}" Name="Border_question_some_correct" >
                     <StackPanel Style="{StaticResource NormalStackPanel}">
-                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_some_correct_1_question"/>
+                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_some_correct_question"/>
+                        <Image Style="{StaticResource Image}" Name="Image_question_some_correct_image" />
                         <WrapPanel>
-                            <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_1_answer_1"/>
-                            <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_1_answer_2"/>
-                            <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_1_answer_3"/>
-                            <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_1_answer_4"/>
+                            <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_answer_1"/>
+                            <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_answer_2"/>
+                            <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_answer_3"/>
+                            <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_answer_4"/>
+                            <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_answer_5"/>
                         </WrapPanel>
                     </StackPanel>
                 </Border>
-                <Border Style="{StaticResource QuestionBorder}" Name="Border_question_some_correct_2" >
-                    <StackPanel Style="{StaticResource NormalStackPanel}">
-                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_some_correct_2_question"/>
-                        <Image Style="{StaticResource Image}" Name="Image_question_some_correct_2_image" />
-                        <WrapPanel>
-                            <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_2_answer_1"/>
-                            <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_2_answer_2"/>
-                            <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_2_answer_3"/>
-                            <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_2_answer_4"/>
-                            <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_2_answer_5"/>
-                        </WrapPanel>
-                    </StackPanel>
-                </Border>
+                <!--Вопросы со вставкой пропущенного слова-->
                 <Border Style="{StaticResource InfoBorder}" Name="Border_question_info_input_word">
                     <StackPanel Style="{StaticResource NormalStackPanel}">
                         <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_info_input_word"/>
                     </StackPanel>
                 </Border>
-                <Border Style="{StaticResource QuestionBorder}" Name="Border_question_input_word_1">
-                    <StackPanel Style="{StaticResource NormalStackPanel}">
-                        <WrapPanel>
-                            <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_question_input_word_1_question_1"/>
-                            <TextBox Style="{StaticResource QuestionTextBox}" Name="TextBox_question_input_word_1_answer_1"/>
-                            <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_question_input_word_1_question_2"/>
-                        </WrapPanel>
-                    </StackPanel>
-                </Border>
-                <Border Style="{StaticResource QuestionBorder}" Name="Border_question_input_word_2">
+                <Border Style="{StaticResource QuestionBorder}" Name="Border_question_input_word">
                     <StackPanel Style="{StaticResource NormalStackPanel}">
                         <WrapPanel>
                             <WrapPanel>
-                                <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_question_input_word_2_question_1"/>
-                                <TextBox Style="{StaticResource QuestionTextBox}" Name="TextBox_question_input_word_2_answer_1"/>
-                                <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_question_input_word_2_question_2"/>
-                                <TextBox Style="{StaticResource QuestionTextBox}" Name="TextBox_question_input_word_2_answer_2"/>
-                                <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_question_input_word_2_question_3"/>
+                                <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_question_input_word_question_1"/>
+                                <TextBox Style="{StaticResource QuestionTextBox}" Name="TextBox_question_input_word_answer_1"/>
+                                <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_question_input_word_question_2"/>
+                                <TextBox Style="{StaticResource QuestionTextBox}" Name="TextBox_question_input_word_answer_2"/>
+                                <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_question_input_word_question_3"/>
                             </WrapPanel>
                         </WrapPanel>
-                        <Image Style="{StaticResource Image}" Name="Image_question_input_word_2_image" />
+                        <Image Style="{StaticResource Image}" Name="Image_question_input_word_image" />
                     </StackPanel>
                 </Border>
-                <!--<Border Style="{StaticResource InfoBorder}" Name="Border_question_info_drag_and_drop">
+                <!--Нижняя навигационная панель-->
+                <Border Style="{StaticResource NavidationBorder}" Name="Border_question_navidation">
                     <StackPanel Style="{StaticResource NormalStackPanel}">
-                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_info_drag_and_drop"/>
+                        <WrapPanel>
+                            <Button Style="{StaticResource HorizontalButton}" Name="Button_left" Click="Button_left_Click">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource IconRestart}"/>
+                                    <TextBlock Style="{StaticResource ButtonText}" Name="TextBlock_left"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource HorizontalButton}" Name="Button_right" Click="Button_right_Click">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource IconBack}"/>
+                                    <TextBlock Style="{StaticResource ButtonText}" Name="TextBlock_right"/>
+                                </StackPanel>
+                            </Button>
+                        </WrapPanel>
                     </StackPanel>
                 </Border>
-                <Border Style="{StaticResource QuestionBorder}" >
-                    <StackPanel Style="{StaticResource NormalStackPanel}">
-                        <TextBlock Style="{StaticResource NormalText}" Text="4_1"/>
-                    </StackPanel>
-                </Border>
-                <Border Style="{StaticResource QuestionBorder}" >
-                    <StackPanel Style="{StaticResource NormalStackPanel}">
-                        <TextBlock Style="{StaticResource NormalText}" Text="4_2"/>
-                    </StackPanel>
-                </Border>-->
             </StackPanel>
         </ScrollViewer>
-
+        <!--Выбор теста для прохождения-->
         <StackPanel Grid.Row="1" Style="{StaticResource CenterStackPanel}" Name="StackPanel_test_choose">
             <Border Style="{StaticResource NormalBorder}" Name="Border_test_choose">
                 <StackPanel Style="{StaticResource NormalStackPanel}">

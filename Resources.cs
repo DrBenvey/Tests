@@ -36,6 +36,14 @@ namespace Tests
                 options.Add(test.Name);
             return options;
         }
+        public string Get_TextBlock_Left_Value()
+        {
+            return "Предыдущий";
+        }
+        public string Get_TextBlock_Right_Value()
+        {
+            return "Следующий";
+        }
         public string Get_TextBlock_Test_Choose_Value()
         {
             return "Выберите тест для прохождения. Для этого нажмите на выпадающий список, расположенный ниже, и нажмите на интересующий Вас тест.";

@@ -7,6 +7,14 @@ namespace Tests
     class Models
     {
     }
+
+    public class Phone
+    {
+        public int Id { get; set; }
+        public string Title { get; set; } // модель телефона
+        public string Company { get; set; } // производитель
+    }
+
     class Answer_Option
     {
         public string Answer { get; set; }
