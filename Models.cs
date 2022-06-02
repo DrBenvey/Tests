@@ -8,11 +8,11 @@ namespace Tests
     {
     }
 
-    public class Phone
+    public class QuestionCounter
     {
-        public int Id { get; set; }
-        public string Title { get; set; } // модель телефона
-        public string Company { get; set; } // производитель
+        public int Part_id { get; set; }
+        public int Question_id { get; set;}
+        
     }
 
     class Answer_Option

@@ -92,7 +92,9 @@
   <ItemGroup>
     <Content Include="data\img\back.svg" />
     <Content Include="data\img\check.svg" />
+    <Content Include="data\img\left.svg" />
     <Content Include="data\img\restart.svg" />
+    <Content Include="data\img\right.svg" />
     <Resource Include="data\pic\демонстрационный_3_2.jpg" />
     <Resource Include="data\pic\демонстрационный_2_2.jpg" />
     <Resource Include="data\pic\демонстрационный_1_2.jpg" />

@@ -15,14 +15,14 @@ namespace Tests
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+        QuestionCounter question_counter;
         Test test;
         private DispatcherTimer _timer=new DispatcherTimer();
         private long _time;
 
         Resources _resources=new Resources();
 
-        public ObservableCollection<Phone> Phones { get; set; }
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -128,7 +128,7 @@ namespace Tests
                 return;
            
             test = _resources.GetTest(Test_Option);
-
+            GetFirstQuestion();
             UploadData();
         }
 
@@ -257,6 +257,167 @@ namespace Tests
         {
             _time++;
             TextBlock_test_time.Text = _resources.TextBlock_Test_Time_Value(_time);           
+        }
+        #endregion
+
+        #region Навигация по тесту
+        //пулучение номера первого вопроса теста
+        public void GetFirstQuestion()
+        {
+            question_counter.Question_id = 0;
+            question_counter.Part_id = 0;
+            if (test.One_Correct_Questions.Count == 0)
+            {
+                question_counter.Part_id = 1;
+                if (test.Some_Correct_Questions.Count == 0)
+                {
+                    question_counter.Part_id = 2;
+                    if (test.Input_Word_Questions.Count == 0)
+                    {
+                        question_counter.Part_id = 3;
+                        if (test.Drag_And_Drop_Questions.Count == 0)
+                        {
+                            question_counter.Part_id = 4;
+                        }
+                    }
+                }
+            }
+        }
+        
+        //можно ли двигаться назад
+        public bool IsAbleBefore()
+        {
+            if (question_counter.Question_id - 1 > -1)
+                return true;
+            else
+            {
+                if (question_counter.Part_id == 0)
+                {
+                    return false;
+                }
+                if (question_counter.Part_id == 1)
+                {
+                    if (test.One_Correct_Questions.Count > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                if (question_counter.Part_id == 2)
+                {
+                    if (test.Some_Correct_Questions.Count > 0)
+                        return true;
+                    else
+                    {
+                        if (test.One_Correct_Questions.Count > 0)
+                            return true;
+                        else
+                            return false;
+                    }
+                        
+                }
+                if (question_counter.Part_id == 3)
+                {
+                    if (test.Input_Word_Questions.Count > 0)
+                        return true;
+                    else
+                    {
+                        if (test.Some_Correct_Questions.Count > 0)
+                            return true;
+                        else
+                        {
+                            if (test.One_Correct_Questions.Count > 0)
+                                return true;
+                            else
+                                return false;
+                        }
+                    }
+
+                }
+                return false;
+            }
+
+        }
+        //можно ли двигаться вперед
+        public bool IsAbleNext()
+        {
+            if (question_counter.Part_id == 0)
+            {
+                if (test.One_Correct_Questions.Count > question_counter.Question_id + 1)
+                    return true;
+                else
+                {
+                    if (test.Some_Correct_Questions.Count > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        if (test.Input_Word_Questions.Count > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            if (test.Drag_And_Drop_Questions.Count > 0)
+                            {
+                                return true;
+                            }
+                            else
+                                return false;
+                        }
+                    }
+                }
+            }
+            if (question_counter.Part_id == 1)
+            {
+                if (test.Some_Correct_Questions.Count > question_counter.Question_id + 1)
+                    return true;
+                else
+                {
+                    if (test.Input_Word_Questions.Count > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        if (test.Drag_And_Drop_Questions.Count > 0)
+                        {
+                            return true;
+                        }
+                        else
+                            return false;
+                    }
+                }
+            }
+            if (question_counter.Part_id == 2)
+            {
+                if (test.Input_Word_Questions.Count > question_counter.Question_id + 1)
+                    return true;
+                else
+                {
+                    if (test.Drag_And_Drop_Questions.Count > 0)
+                    {
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+            }
+            if (question_counter.Part_id == 3)
+            {
+                if (test.Drag_And_Drop_Questions.Count > question_counter.Question_id + 1)
+                    return true;
+                else
+                {
+                    if (test.Drag_And_Drop_Questions.Count > 0)
+                    {
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+            }
+            return false;
         }
         #endregion
     }
