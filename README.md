@@ -41,4 +41,5 @@ https://www.svgrepo.com/vectors/
 проверка
 
 ## License
+
 MIT License
