@@ -113,10 +113,14 @@ namespace Tests
             if (Test_Option == null)
                 return;
 
-            test = _resources.GetTest(Test_Option);
+            test = _resources.GetTestOrNullByName(Test_Option);
+            if (test == null)
+                return ;
+
             question_counter = _test_navigation.GetFirstOrNullQuestion(test);
             if (question_counter == null)
                 return ;
+
             UploadData();
         }
 
@@ -259,12 +263,20 @@ namespace Tests
             else
                 Button_right.IsEnabled= true;
         }
-
+        /// <summary>
+        /// Запомнить ответ и перейти к следующему
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_right_Click(object sender, RoutedEventArgs e)
         {
 
         }
-
+        /// <summary>
+        /// Запомнить ответ и перейти к пердыдущему
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_left_Click(object sender, RoutedEventArgs e)
         {
 

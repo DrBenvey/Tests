@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tests
+namespace Tests.test
 {
-    class GetTests
+    class get_tests
     {
         public List<Test> GetTemplatesForTests()
         {
@@ -15,14 +15,7 @@ namespace Tests
             #endregion
             return tests;
         }
-        public List<Test> GetResourcesTests()
-        {
-            List<Test> tests = GetTemplatesForTests();
-            //todo
-            //перемешать вопросы в каждой группе в случайном порядке
-            //перемешать варианты ответов в случаной порядке
-            return tests;
-        }
+
         #region demo
         public Test GetDemoTest(string name)
         {
@@ -31,16 +24,16 @@ namespace Tests
             test.One_Correct_Questions = GetDemoOneCorrectQuestions();
             test.Some_Correct_Questions = GetDemoSomeCorrectQuestions();
             test.Input_Word_Questions = GetDemoInputWordQuestions();
-            test.Drag_And_Drop_Questions = new List<Drag_And_Drop>();            
+            test.Drag_And_Drop_Questions = new List<Drag_And_Drop>();
             return test;
         }
         public List<Input_Word> GetDemoInputWordQuestions()
         {
             List<Input_Word> one_Corrects = new List<Input_Word>();
             Input_Word q1 = new Input_Word();
-            q1.Question = new List<string> {"Если от 12 отнять 4, то получится", "<Input_Word>","." };
+            q1.Question = new List<string> { "Если от 12 отнять 4, то получится", "<Input_Word>", "." };
             q1.Picture = "-";
-            q1.Answer=new List<string> { "8" };
+            q1.Answer = new List<string> { "8" };
             one_Corrects.Add(q1);
             Input_Word q2 = new Input_Word();
             q2.Question = new List<string> { "На картинке ниже находится", "<Input_Word>", ". Это вид хищных млекопитающих", "<Input_Word>", "." };
@@ -52,10 +45,10 @@ namespace Tests
         public List<One_Correct> GetDemoOneCorrectQuestions()
         {
             List<One_Correct> one_Corrects = new List<One_Correct>();
-            One_Correct q1= new One_Correct();
+            One_Correct q1 = new One_Correct();
             q1.Question = "Чему равно выражение 1+2?";
             q1.Picture = "-";
-            q1.Answer_Option = new List<Answer_Option> { 
+            q1.Answer_Option = new List<Answer_Option> {
                 new Answer_Option() {Answer="2",IsCorrect=false },
                 new Answer_Option() {Answer="3",IsCorrect=true },
                 new Answer_Option() {Answer="4",IsCorrect=false },

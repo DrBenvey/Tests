@@ -1,32 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Tests.test;
 
 namespace Tests
 {
     class Resources
     {
-        GetTests _getTests=new GetTests();
+        get_tests _getTests=new get_tests();
+        shuffle_test_questions _shuffle_test_questions=new shuffle_test_questions();
         List<Test> tests;
         Test this_test;
         public Resources()
         {
-            tests= _getTests.GetResourcesTests();
+            tests= _getTests.GetTemplatesForTests();
         }
 
-        public Test GetTest(string Test_Option)
+        public Test GetTestOrNullByName(string Test_Option)
         {
             Test tmp=new Test();
             foreach (Test test in tests)
             {
                 if(test.Name == Test_Option)
                 {
+                    tmp= _shuffle_test_questions.GetShuffledTest(test);
                     this_test=test;
                     return test;
                 }
                     
             }
-            return tmp;
+            return null;
         }
 
         public List<string> ComboBox_Test_Choose_Options()

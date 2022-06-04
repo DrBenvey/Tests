@@ -25,18 +25,21 @@ namespace Tests
         public string Question { get; set; }
         public string Picture { get; set; }
         public List<Answer_Option> Answer_Option { get; set; }
+        public int Person_Answer { get; set; }
     }
     class Some_Correct
     {
         public string Question { get; set; }
         public string Picture { get; set; }
         public List<Answer_Option> Answer_Option { get; set; }
+        public List<int> Person_Answer { get; set; }
     }
     class Input_Word
     {
         public List<string> Question { get; set; }
         public string Picture { get; set; }
         public List<string> Answer { get; set; }
+        public List<string> Person_Answer { get; set; }
 
     }
     class Drag_And_Drop

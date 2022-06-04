@@ -221,7 +221,7 @@
                 <!--Нижняя навигационная панель-->
                 <Border Style="{StaticResource NavidationBorder}" Name="Border_question_navidation">
                     <StackPanel Style="{StaticResource NormalStackPanel}">
-                        <Grid ShowGridLines="False">
+                        <!--<Grid ShowGridLines="False">
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
@@ -241,7 +241,21 @@
                                     <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource IconRight}"/>
                                 </StackPanel>
                             </Button>
-                        </Grid>
+                        </Grid>-->
+                        <WrapPanel>
+                            <Button Style="{StaticResource HorizontalButton}" Name="Button_left" Click="Button_left_Click">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource IconLeft}"/>
+                                    <TextBlock Style="{StaticResource ButtonText}" Name="TextBlock_left"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource HorizontalButton}" Name="Button_right" Click="Button_right_Click">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource IconRight}"/>
+                                    <TextBlock Style="{StaticResource ButtonText}" Name="TextBlock_right"/>
+                                </StackPanel>
+                            </Button>
+                        </WrapPanel>
                     </StackPanel>
                 </Border>
             </StackPanel>
