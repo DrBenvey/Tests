@@ -23,7 +23,7 @@ namespace Tests
             {
                 if(test.Name == Test_Option)
                 {
-                    tmp= _shuffle_test_questions.GetShuffledTest(test);
+                    //tmp= _shuffle_test_questions.GetShuffledTest(test);
                     this_test=test;
                     return test;
                 }
