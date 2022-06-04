@@ -5,7 +5,8 @@ using System.Text;
 namespace Tests.test
 {
     class shuffle_test_questions
-    {       
+    {
+        static Random rnd = new Random();
         public Test GetShuffledTest(Test test)
         {
             Test sh_Test=new Test();
@@ -25,8 +26,7 @@ namespace Tests.test
         }
         public static List<T> Randomize<T>(List<T> list)
         {
-            List<T> randomizedList = new List<T>();
-            Random rnd = new Random();
+            List<T> randomizedList = new List<T>();           
             while (list.Count > 0)
             {
                 int index = rnd.Next(0, list.Count); //pick a random item from the master list

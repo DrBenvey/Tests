@@ -31,12 +31,12 @@ namespace Tests.test
         {
             List<Input_Word> one_Corrects = new List<Input_Word>();
             Input_Word q1 = new Input_Word();
-            q1.Question = new List<string> { "Если от 12 отнять 4, то получится", "<Input_Word>", "." };
+            q1.Question = new List<string> { "Если от 12 отнять 4, то получится", "." };
             q1.Picture = "-";
             q1.Answer = new List<string> { "8" };
             one_Corrects.Add(q1);
             Input_Word q2 = new Input_Word();
-            q2.Question = new List<string> { "На картинке ниже находится", "<Input_Word>", ". Это вид хищных млекопитающих", "<Input_Word>", "." };
+            q2.Question = new List<string> { "На картинке ниже находится", ". Это вид хищных млекопитающих", "." };
             q2.Picture = "/Tests;component/data/pic/демонстрационный_3_2.jpg";
             q1.Answer = new List<string> { "тигр", "семейства кошачьих" };
             one_Corrects.Add(q2);

@@ -138,6 +138,7 @@ namespace Tests
             Border_question_some_correct.Visibility = Visibility.Collapsed;
             Border_question_info_input_word.Visibility = Visibility.Collapsed;
             Border_question_input_word.Visibility = Visibility.Collapsed;
+            //todo
 
             switch (question_counter.Part_id)
             {
@@ -153,6 +154,9 @@ namespace Tests
                     Border_question_info_input_word.Visibility = Visibility.Visible;
                     Border_question_input_word.Visibility = Visibility.Visible;
                     break;
+                case 3:
+                    //todo
+                    break;
             }
         }
         /// <summary>
@@ -165,17 +169,84 @@ namespace Tests
             RadioButton_question_one_correct_answer_3.IsChecked = false;
             RadioButton_question_one_correct_answer_4.IsChecked = false;
             RadioButton_question_one_correct_answer_5.IsChecked = false;
+            RadioButton_question_one_correct_answer_6.IsChecked = false;
 
             CheckBox_question_some_correct_answer_1.IsChecked = false;
             CheckBox_question_some_correct_answer_2.IsChecked = false;
             CheckBox_question_some_correct_answer_3.IsChecked = false;
             CheckBox_question_some_correct_answer_4.IsChecked = false;
             CheckBox_question_some_correct_answer_5.IsChecked = false;
+            CheckBox_question_some_correct_answer_6.IsChecked = false;
 
+            TextBox_question_input_word_answer_1.Text = "";
+            TextBox_question_input_word_answer_2.Text = "";
+            TextBox_question_input_word_answer_3.Text = "";
             //todo
         }
-        
-        #region Hardcoded demo
+        /// <summary>
+        /// Сохраняет текущий вариант ответа
+        /// </summary>
+        public void SaveIt()
+        {
+            switch (question_counter.Part_id)
+            {
+                case 0:
+                    if (RadioButton_question_one_correct_answer_1.IsChecked == false 
+                        && RadioButton_question_one_correct_answer_2.IsChecked == false 
+                        && RadioButton_question_one_correct_answer_3.IsChecked == false 
+                        && RadioButton_question_one_correct_answer_4.IsChecked == false 
+                        && RadioButton_question_one_correct_answer_5.IsChecked == false 
+                        && RadioButton_question_one_correct_answer_6.IsChecked == false)
+                        test.One_Correct_Questions[question_counter.Question_id].Person_Answer = null;
+                    else
+                    {
+                        if (RadioButton_question_one_correct_answer_1.IsChecked == true)
+                            test.One_Correct_Questions[question_counter.Question_id].Person_Answer = 0;
+                        if (RadioButton_question_one_correct_answer_2.IsChecked == true)
+                            test.One_Correct_Questions[question_counter.Question_id].Person_Answer = 1;
+                        if (RadioButton_question_one_correct_answer_3.IsChecked == true)
+                            test.One_Correct_Questions[question_counter.Question_id].Person_Answer = 2;
+                        if (RadioButton_question_one_correct_answer_4.IsChecked == true)
+                            test.One_Correct_Questions[question_counter.Question_id].Person_Answer = 3;
+                        if (RadioButton_question_one_correct_answer_5.IsChecked == true)
+                            test.One_Correct_Questions[question_counter.Question_id].Person_Answer = 4;
+                        if (RadioButton_question_one_correct_answer_6.IsChecked == true)
+                            test.One_Correct_Questions[question_counter.Question_id].Person_Answer = 5;
+                    }
+                    break;
+                case 1:
+                    if (CheckBox_question_some_correct_answer_1.IsChecked == false 
+                        && CheckBox_question_some_correct_answer_2.IsChecked == false
+                        && CheckBox_question_some_correct_answer_3.IsChecked == false
+                        && CheckBox_question_some_correct_answer_4.IsChecked == false
+                        && CheckBox_question_some_correct_answer_5.IsChecked == false
+                        && CheckBox_question_some_correct_answer_6.IsChecked == false)
+                        test.Some_Correct_Questions[question_counter.Question_id].Person_Answer = null;
+                    else
+                    {
+                        test.Some_Correct_Questions[question_counter.Question_id].Person_Answer = new List<int>();
+                        if (CheckBox_question_some_correct_answer_1.IsChecked == true)
+                            test.Some_Correct_Questions[question_counter.Question_id].Person_Answer.Add(0);
+                        if (CheckBox_question_some_correct_answer_2.IsChecked == true)
+                            test.Some_Correct_Questions[question_counter.Question_id].Person_Answer.Add(1);
+                        if (CheckBox_question_some_correct_answer_3.IsChecked == true)
+                            test.Some_Correct_Questions[question_counter.Question_id].Person_Answer.Add(2);
+                        if (CheckBox_question_some_correct_answer_4.IsChecked == true)
+                            test.Some_Correct_Questions[question_counter.Question_id].Person_Answer.Add(3);
+                        if (CheckBox_question_some_correct_answer_5.IsChecked == true)
+                            test.Some_Correct_Questions[question_counter.Question_id].Person_Answer.Add(4);
+                        if (CheckBox_question_some_correct_answer_6.IsChecked == true)
+                            test.Some_Correct_Questions[question_counter.Question_id].Person_Answer.Add(5);
+                    }
+                    break;
+                case 2:
+                    //todo
+                    break;
+                case 3:
+                    //todo
+                    break;
+            }
+        }
 
         public void ShowQuestion()
         {
@@ -201,6 +272,7 @@ namespace Tests
                     RadioButton_question_one_correct_answer_3.Visibility = Visibility.Visible;
                     RadioButton_question_one_correct_answer_4.Visibility = Visibility.Visible;
                     RadioButton_question_one_correct_answer_5.Visibility = Visibility.Visible;
+                    RadioButton_question_one_correct_answer_6.Visibility = Visibility.Visible;
 
                     switch (test.One_Correct_Questions[question_counter.Question_id].Answer_Option.Count)
                     {
@@ -210,6 +282,7 @@ namespace Tests
                             RadioButton_question_one_correct_answer_3.Visibility = Visibility.Collapsed;
                             RadioButton_question_one_correct_answer_4.Visibility = Visibility.Collapsed;
                             RadioButton_question_one_correct_answer_5.Visibility = Visibility.Collapsed;
+                            RadioButton_question_one_correct_answer_6.Visibility = Visibility.Collapsed;
                             break;
                         case 3:
                             RadioButton_question_one_correct_answer_1.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
@@ -217,6 +290,7 @@ namespace Tests
                             RadioButton_question_one_correct_answer_3.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[2].Answer;
                             RadioButton_question_one_correct_answer_4.Visibility = Visibility.Collapsed;
                             RadioButton_question_one_correct_answer_5.Visibility = Visibility.Collapsed;
+                            RadioButton_question_one_correct_answer_6.Visibility = Visibility.Collapsed;
                             break;
                         case 4:
                             RadioButton_question_one_correct_answer_1.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
@@ -224,6 +298,7 @@ namespace Tests
                             RadioButton_question_one_correct_answer_3.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[2].Answer;
                             RadioButton_question_one_correct_answer_4.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[3].Answer;
                             RadioButton_question_one_correct_answer_5.Visibility = Visibility.Collapsed;
+                            RadioButton_question_one_correct_answer_6.Visibility = Visibility.Collapsed;
                             break;
                         case 5:
                             RadioButton_question_one_correct_answer_1.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
@@ -231,6 +306,15 @@ namespace Tests
                             RadioButton_question_one_correct_answer_3.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[2].Answer;
                             RadioButton_question_one_correct_answer_4.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[3].Answer;
                             RadioButton_question_one_correct_answer_5.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[4].Answer;
+                            RadioButton_question_one_correct_answer_6.Visibility = Visibility.Collapsed;
+                            break;
+                        case 6:
+                            RadioButton_question_one_correct_answer_1.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
+                            RadioButton_question_one_correct_answer_2.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[1].Answer;
+                            RadioButton_question_one_correct_answer_3.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[2].Answer;
+                            RadioButton_question_one_correct_answer_4.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[3].Answer;
+                            RadioButton_question_one_correct_answer_5.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[4].Answer;
+                            RadioButton_question_one_correct_answer_6.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[5].Answer;
                             break;
                     }
                     break;
@@ -250,6 +334,7 @@ namespace Tests
                     CheckBox_question_some_correct_answer_3.Visibility = Visibility.Visible;
                     CheckBox_question_some_correct_answer_4.Visibility = Visibility.Visible;
                     CheckBox_question_some_correct_answer_5.Visibility = Visibility.Visible;
+                    CheckBox_question_some_correct_answer_6.Visibility = Visibility.Visible;
 
                     switch (test.Some_Correct_Questions[question_counter.Question_id].Answer_Option.Count)
                     {
@@ -259,6 +344,7 @@ namespace Tests
                             CheckBox_question_some_correct_answer_3.Visibility = Visibility.Collapsed;
                             CheckBox_question_some_correct_answer_4.Visibility = Visibility.Collapsed;
                             CheckBox_question_some_correct_answer_5.Visibility = Visibility.Collapsed;
+                            CheckBox_question_some_correct_answer_6.Visibility = Visibility.Collapsed;
                             break;
                         case 3:
                             CheckBox_question_some_correct_answer_1.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
@@ -266,6 +352,7 @@ namespace Tests
                             CheckBox_question_some_correct_answer_3.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[2].Answer;
                             CheckBox_question_some_correct_answer_4.Visibility = Visibility.Collapsed;
                             CheckBox_question_some_correct_answer_5.Visibility = Visibility.Collapsed;
+                            CheckBox_question_some_correct_answer_6.Visibility = Visibility.Collapsed;
                             break;
                         case 4:
                             CheckBox_question_some_correct_answer_1.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
@@ -273,6 +360,7 @@ namespace Tests
                             CheckBox_question_some_correct_answer_3.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[2].Answer;
                             CheckBox_question_some_correct_answer_4.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[3].Answer;
                             CheckBox_question_some_correct_answer_5.Visibility = Visibility.Collapsed;
+                            CheckBox_question_some_correct_answer_6.Visibility = Visibility.Collapsed;
                             break;
                         case 5:
                             CheckBox_question_some_correct_answer_1.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
@@ -280,16 +368,63 @@ namespace Tests
                             CheckBox_question_some_correct_answer_3.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[2].Answer;
                             CheckBox_question_some_correct_answer_4.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[3].Answer;
                             CheckBox_question_some_correct_answer_5.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[4].Answer;
+                            CheckBox_question_some_correct_answer_6.Visibility = Visibility.Collapsed;
+                            break;
+                        case 6:
+                            CheckBox_question_some_correct_answer_1.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
+                            CheckBox_question_some_correct_answer_2.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[1].Answer;
+                            CheckBox_question_some_correct_answer_3.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[2].Answer;
+                            CheckBox_question_some_correct_answer_4.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[3].Answer;
+                            CheckBox_question_some_correct_answer_5.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[4].Answer;
+                            CheckBox_question_some_correct_answer_6.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[5].Answer;
                             break;
                     }
                     break;
                 case 2:
-                    //todo
                     Border_question_input_word.Background = new SolidColorBrush(Colors.LightGray);
-                    TextBlock_question_input_word_question_1.Text = test.Input_Word_Questions[1].Question[0];
-                    TextBlock_question_input_word_question_2.Text = test.Input_Word_Questions[1].Question[2];
-                    TextBlock_question_input_word_question_3.Text = test.Input_Word_Questions[1].Question[4];
-                    Image_question_input_word_image.Source = new BitmapImage(new Uri(test.Input_Word_Questions[1].Picture, UriKind.Relative));
+                    if (test.Input_Word_Questions[question_counter.Question_id].Picture == "-")
+                        Image_question_input_word_image.Visibility = Visibility.Collapsed;
+                    else
+                    {
+                        Image_question_input_word_image.Visibility = Visibility.Visible;
+                        Image_question_input_word_image.Source = new BitmapImage(new Uri(test.Input_Word_Questions[question_counter.Question_id].Picture, UriKind.Relative));
+                    }
+
+                    TextBlock_question_input_word_question_1.Visibility = Visibility.Visible;
+                    TextBox_question_input_word_answer_1.Visibility = Visibility.Visible;
+                    TextBlock_question_input_word_question_2.Visibility = Visibility.Visible;
+                    TextBox_question_input_word_answer_2.Visibility = Visibility.Visible;
+                    TextBlock_question_input_word_question_3.Visibility = Visibility.Visible;
+                    TextBox_question_input_word_answer_3.Visibility = Visibility.Visible;
+                    TextBlock_question_input_word_question_4.Visibility = Visibility.Visible;
+
+                    switch (test.Input_Word_Questions[question_counter.Question_id].Question.Count)
+                    {
+                        case 2:
+                            TextBlock_question_input_word_question_1.Text = test.Input_Word_Questions[question_counter.Question_id].Question[0];
+                            TextBlock_question_input_word_question_2.Text = test.Input_Word_Questions[question_counter.Question_id].Question[1];
+                            TextBox_question_input_word_answer_2.Visibility = Visibility.Collapsed;
+                            TextBox_question_input_word_answer_3.Visibility = Visibility.Collapsed;
+                            TextBlock_question_input_word_question_3.Visibility = Visibility.Collapsed;
+                            TextBlock_question_input_word_question_4.Visibility = Visibility.Collapsed;
+                            break;
+                        case 3:
+                            TextBlock_question_input_word_question_1.Text = test.Input_Word_Questions[question_counter.Question_id].Question[0];
+                            TextBlock_question_input_word_question_2.Text = test.Input_Word_Questions[question_counter.Question_id].Question[1];
+                            TextBlock_question_input_word_question_3.Text = test.Input_Word_Questions[question_counter.Question_id].Question[2];
+                            TextBlock_question_input_word_question_4.Visibility = Visibility.Collapsed;
+                            TextBox_question_input_word_answer_3.Visibility = Visibility.Collapsed;
+                            break;
+                        case 4:
+                            TextBlock_question_input_word_question_1.Text = test.Input_Word_Questions[question_counter.Question_id].Question[0];
+                            TextBlock_question_input_word_question_2.Text = test.Input_Word_Questions[question_counter.Question_id].Question[1];
+                            TextBlock_question_input_word_question_3.Text = test.Input_Word_Questions[question_counter.Question_id].Question[2];
+                            TextBlock_question_input_word_question_4.Text = test.Input_Word_Questions[question_counter.Question_id].Question[3];
+                            break;
+                    }
+                    break;
+                case 3:
+                    //todo
                     break;
             }
         }
@@ -331,8 +466,6 @@ namespace Tests
             TextBlock_test_result.Visibility = Visibility.Visible;
             TextBlock_test_result.Text = _resources.Get_TextBlock_Test_Result_Value(correct_answers);
         }
-
-        #endregion
 
         #region Timer
         /// <summary>
@@ -392,7 +525,9 @@ namespace Tests
         /// <param name="e"></param>
         private void Button_right_Click(object sender, RoutedEventArgs e)
         {
-
+            SaveIt();
+            question_counter = question_counter_after;
+            ShowQuestion();
         }
         /// <summary>
         /// Запомнить ответ и перейти к пердыдущему
@@ -401,7 +536,9 @@ namespace Tests
         /// <param name="e"></param>
         private void Button_left_Click(object sender, RoutedEventArgs e)
         {
-
+            SaveIt();
+            question_counter = question_counter_before;
+            ShowQuestion();
         }
 
         /// <summary>

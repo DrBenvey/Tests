@@ -25,7 +25,7 @@ namespace Tests
         public string Question { get; set; }
         public string Picture { get; set; }
         public List<Answer_Option> Answer_Option { get; set; }
-        public int Person_Answer { get; set; }
+        public int? Person_Answer { get; set; }
     }
     class Some_Correct
     {
@@ -44,7 +44,7 @@ namespace Tests
     }
     class Drag_And_Drop
     {
-        //?
+        //todo
     }
     class Test
     {

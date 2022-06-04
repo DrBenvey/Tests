@@ -176,6 +176,7 @@
                             <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct" Name="RadioButton_question_one_correct_answer_3"/>
                             <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct" Name="RadioButton_question_one_correct_answer_4"/>
                             <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct" Name="RadioButton_question_one_correct_answer_5"/>
+                            <RadioButton Style="{StaticResource HorizontalRadioButton}" GroupName="RadioButton_question_one_correct" Name="RadioButton_question_one_correct_answer_6"/>
                         </WrapPanel>
                     </StackPanel>
                 </Border>
@@ -195,6 +196,7 @@
                             <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_answer_3"/>
                             <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_answer_4"/>
                             <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_answer_5"/>
+                            <CheckBox Style="{StaticResource HorizontalCheckBox}" Name="CheckBox_question_some_correct_answer_6"/>
                         </WrapPanel>
                     </StackPanel>
                 </Border>
@@ -213,6 +215,8 @@
                                 <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_question_input_word_question_2"/>
                                 <TextBox Style="{StaticResource QuestionTextBox}" Name="TextBox_question_input_word_answer_2"/>
                                 <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_question_input_word_question_3"/>
+                                <TextBox Style="{StaticResource QuestionTextBox}" Name="TextBox_question_input_word_answer_3"/>
+                                <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_question_input_word_question_4"/>
                             </WrapPanel>
                         </WrapPanel>
                         <Image Style="{StaticResource Image}" Name="Image_question_input_word_image" />
