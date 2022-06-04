@@ -49,6 +49,7 @@
     <Compile Include="GetTests.cs" />
     <Compile Include="Models.cs" />
     <Compile Include="Resources.cs" />
+    <Compile Include="test\test_navigation.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

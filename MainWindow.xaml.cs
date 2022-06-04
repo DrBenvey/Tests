@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Tests.test;
 
 namespace Tests
 {
@@ -15,14 +16,17 @@ namespace Tests
     /// </summary>
     public partial class MainWindow : Window
     {
+        QuestionCounter question_counter_before;
+        QuestionCounter question_counter_after;
         QuestionCounter question_counter;
         Test test;
+
         private DispatcherTimer _timer=new DispatcherTimer();
         private long _time;
 
         Resources _resources=new Resources();
+        test_navigation _test_navigation = new test_navigation();
 
-        
         public MainWindow()
         {
             InitializeComponent();
@@ -30,25 +34,10 @@ namespace Tests
             Get_choose_content();
         }
 
-
-        public void Navigation(string view)
-        {
-            switch (view)
-            {
-                case "choose_content":
-                    ScrollViewer_main.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
-                    StackPanel_test_choose.Visibility = Visibility.Visible;
-                    StackPanel_main.Visibility = Visibility.Hidden;
-                    StackPanel_test_navidation.Visibility = Visibility.Hidden;
-                    break;
-                case "main_content":
-                    ScrollViewer_main.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;                    
-                    StackPanel_test_choose.Visibility = Visibility.Hidden; 
-                    StackPanel_main.Visibility = Visibility.Visible;
-                    StackPanel_test_navidation.Visibility = Visibility.Visible;
-                    break;
-            }
-        }
+        /// <summary>
+        /// подгрузка названий для кнопок, 
+        /// вариантов выбора теста
+        /// </summary>
         public void Get_start_content()
         {
             _timer.Interval = new TimeSpan(0, 0, 1);
@@ -70,11 +59,65 @@ namespace Tests
             foreach (string test_choose_option in test_choose_options)
                 ComboBox_test_choose.Items.Add(test_choose_option);
         }
+        /// <summary>
+        /// видимость формы выбора теста для прохождения
+        /// </summary>
         public void Get_choose_content()
         {
             ComboBox_test_choose.SelectedItem = null;
             Window.Title = _resources.Get_Window_Test_Choose_Value();
             Navigation("choose_content");
+        }
+        /// <summary>
+        /// навигация между формами выбора теста и прохождения теста
+        /// </summary>
+        /// <param name="view"></param>
+        public void Navigation(string view)
+        {
+            switch (view)
+            {
+                case "choose_content":
+                    ScrollViewer_main.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+                    StackPanel_test_choose.Visibility = Visibility.Visible;
+                    StackPanel_main.Visibility = Visibility.Hidden;
+                    StackPanel_test_navidation.Visibility = Visibility.Hidden;
+                    break;
+                case "main_content":
+                    ScrollViewer_main.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;                    
+                    StackPanel_test_choose.Visibility = Visibility.Hidden; 
+                    StackPanel_main.Visibility = Visibility.Visible;
+                    StackPanel_test_navidation.Visibility = Visibility.Visible;
+                    break;
+            }
+        }
+        /// <summary>
+        /// выбор теста для прохождения
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBox_test_choose_Selected(object sender, RoutedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            TextBlock_test_navidation.Text = _resources.Get_TextBlock_Test_Navidation_Value((string)comboBox.SelectedItem);
+            Navigation("main_content");
+            Window.Title = _resources.Get_Window_Test_Bigin_Value();
+            Timer("start");
+            UploadTest((string)comboBox.SelectedItem);
+        }
+        /// <summary>
+        /// загрузка выбранного для прохождения теста
+        /// </summary>
+        /// <param name="Test_Option"></param>
+        public void UploadTest(string Test_Option)
+        {
+            if (Test_Option == null)
+                return;
+
+            test = _resources.GetTest(Test_Option);
+            question_counter = _test_navigation.GetFirstOrNullQuestion(test);
+            if (question_counter == null)
+                return ;
+            UploadData();
         }
 
         #region Hardcoded demo
@@ -84,7 +127,10 @@ namespace Tests
             TextBlock_test_result.Text = "";
             TextBlock_test_result.Visibility = Visibility.Hidden;            
             Button_finish.IsEnabled = true;
-            
+            EnabledLeftRightButtons();
+
+
+
             RadioButton_question_one_correct_answer_1.IsChecked = false;
             RadioButton_question_one_correct_answer_2.IsChecked = false;
             RadioButton_question_one_correct_answer_3.IsChecked = false;
@@ -122,15 +168,7 @@ namespace Tests
             Image_question_input_word_image.Source = new BitmapImage(new Uri(test.Input_Word_Questions[1].Picture, UriKind.Relative));
         }
 
-        public void UploadTest(string Test_Option)
-        {
-            if (Test_Option == null)
-                return;
-           
-            test = _resources.GetTest(Test_Option);
-            GetFirstQuestion();
-            UploadData();
-        }
+        
 
         public void Check()
         {
@@ -170,71 +208,11 @@ namespace Tests
 
         #endregion
 
-        #region Forms button actions
-
-        private void Button_right_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_left_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void ComboBox_test_choose_Selected(object sender, RoutedEventArgs e)
-        {
-            ComboBox comboBox = (ComboBox)sender;
-            TextBlock_test_navidation.Text = _resources.Get_TextBlock_Test_Navidation_Value((string)comboBox.SelectedItem);
-            Navigation("main_content");
-            Window.Title = _resources.Get_Window_Test_Bigin_Value();
-            Timer("start");
-            UploadTest((string)comboBox.SelectedItem);
-        }
-
-        private void Button_restart_Click(object sender, RoutedEventArgs e)
-        {
-            Timer("pause");
-            if (MessageBox.Show(_resources.Get_MessageBox_Restart_Value(), _resources.Get_MessageBox_Title_Value(), MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
-            {
-                Timer("continue");
-            }
-            else
-            {
-                Timer("start");
-                UploadData();
-            }
-        }
-
-        private void Button_back_Click(object sender, RoutedEventArgs e)
-        {
-            Timer("pause");
-            if (MessageBox.Show(_resources.Get_MessageBox_Back_Value(), _resources.Get_MessageBox_Title_Value(), MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
-            {
-                Timer("continue");
-            }
-            else
-            {
-                Get_choose_content();
-            }
-        }
-
-        private void Button_finish_Click(object sender, RoutedEventArgs e)
-        {
-            Timer("pause");
-            if (MessageBox.Show(_resources.Get_MessageBox_Finish_Value(), _resources.Get_MessageBox_Title_Value(), MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
-            {
-                Timer("continue");
-            }
-            else
-            {
-                Check();
-            }
-        }
-
-        #endregion
-
         #region Timer
+        /// <summary>
+        /// управления старт/стоп ht;bvfvb nfqvthf
+        /// </summary>
+        /// <param name="option"></param>
         public void Timer(string option)
         {
             switch (option)
@@ -252,7 +230,11 @@ namespace Tests
             }
             
         }
-
+        /// <summary>
+        /// отображение тиков таймера на форму
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Timer_Tick(object sender, EventArgs e)
         {
             _time++;
@@ -261,164 +243,88 @@ namespace Tests
         #endregion
 
         #region Навигация по тесту
-        //пулучение номера первого вопроса теста
-        public void GetFirstQuestion()
+        /// <summary>
+        /// Доступность нажатия следующего/предыдущего вопроса
+        /// </summary>
+        public void EnabledLeftRightButtons()
         {
-            question_counter.Question_id = 0;
-            question_counter.Part_id = 0;
-            if (test.One_Correct_Questions.Count == 0)
-            {
-                question_counter.Part_id = 1;
-                if (test.Some_Correct_Questions.Count == 0)
-                {
-                    question_counter.Part_id = 2;
-                    if (test.Input_Word_Questions.Count == 0)
-                    {
-                        question_counter.Part_id = 3;
-                        if (test.Drag_And_Drop_Questions.Count == 0)
-                        {
-                            question_counter.Part_id = 4;
-                        }
-                    }
-                }
-            }
+            question_counter_before= _test_navigation.GetBeforeOrNullQuestion(test, question_counter);
+            if (question_counter_before==null)
+                Button_left.IsEnabled = false;
+            else
+                Button_left.IsEnabled = true;
+            question_counter_after= _test_navigation.GetNextOrNullQuestion(test, question_counter);
+            if (question_counter_after==null)
+                Button_right.IsEnabled = false;
+            else
+                Button_right.IsEnabled= true;
         }
-        
-        //можно ли двигаться назад
-        public bool IsAbleBefore()
+
+        private void Button_right_Click(object sender, RoutedEventArgs e)
         {
-            if (question_counter.Question_id - 1 > -1)
-                return true;
+
+        }
+
+        private void Button_left_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Начать тест заново
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_restart_Click(object sender, RoutedEventArgs e)
+        {
+            Timer("pause");
+            if (MessageBox.Show(_resources.Get_MessageBox_Restart_Value(), _resources.Get_MessageBox_Title_Value(), MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            {
+                Timer("continue");
+            }
             else
             {
-                if (question_counter.Part_id == 0)
-                {
-                    return false;
-                }
-                if (question_counter.Part_id == 1)
-                {
-                    if (test.One_Correct_Questions.Count > 0)
-                        return true;
-                    else
-                        return false;
-                }
-                if (question_counter.Part_id == 2)
-                {
-                    if (test.Some_Correct_Questions.Count > 0)
-                        return true;
-                    else
-                    {
-                        if (test.One_Correct_Questions.Count > 0)
-                            return true;
-                        else
-                            return false;
-                    }
-                        
-                }
-                if (question_counter.Part_id == 3)
-                {
-                    if (test.Input_Word_Questions.Count > 0)
-                        return true;
-                    else
-                    {
-                        if (test.Some_Correct_Questions.Count > 0)
-                            return true;
-                        else
-                        {
-                            if (test.One_Correct_Questions.Count > 0)
-                                return true;
-                            else
-                                return false;
-                        }
-                    }
-
-                }
-                return false;
+                Timer("start");
+                UploadData();
             }
-
         }
-        //можно ли двигаться вперед
-        public bool IsAbleNext()
+
+        /// <summary>
+        /// Вернуться к выбору тестов
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_back_Click(object sender, RoutedEventArgs e)
         {
-            if (question_counter.Part_id == 0)
+            Timer("pause");
+            if (MessageBox.Show(_resources.Get_MessageBox_Back_Value(), _resources.Get_MessageBox_Title_Value(), MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
             {
-                if (test.One_Correct_Questions.Count > question_counter.Question_id + 1)
-                    return true;
-                else
-                {
-                    if (test.Some_Correct_Questions.Count > 0)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        if (test.Input_Word_Questions.Count > 0)
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            if (test.Drag_And_Drop_Questions.Count > 0)
-                            {
-                                return true;
-                            }
-                            else
-                                return false;
-                        }
-                    }
-                }
+                Timer("continue");
             }
-            if (question_counter.Part_id == 1)
+            else
             {
-                if (test.Some_Correct_Questions.Count > question_counter.Question_id + 1)
-                    return true;
-                else
-                {
-                    if (test.Input_Word_Questions.Count > 0)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        if (test.Drag_And_Drop_Questions.Count > 0)
-                        {
-                            return true;
-                        }
-                        else
-                            return false;
-                    }
-                }
+                Get_choose_content();
             }
-            if (question_counter.Part_id == 2)
-            {
-                if (test.Input_Word_Questions.Count > question_counter.Question_id + 1)
-                    return true;
-                else
-                {
-                    if (test.Drag_And_Drop_Questions.Count > 0)
-                    {
-                        return true;
-                    }
-                    else
-                        return false;
-                }
-            }
-            if (question_counter.Part_id == 3)
-            {
-                if (test.Drag_And_Drop_Questions.Count > question_counter.Question_id + 1)
-                    return true;
-                else
-                {
-                    if (test.Drag_And_Drop_Questions.Count > 0)
-                    {
-                        return true;
-                    }
-                    else
-                        return false;
-                }
-            }
-            return false;
         }
+
+        /// <summary>
+        /// Закончить тест
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_finish_Click(object sender, RoutedEventArgs e)
+        {
+            Timer("pause");
+            if (MessageBox.Show(_resources.Get_MessageBox_Finish_Value(), _resources.Get_MessageBox_Title_Value(), MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            {
+                Timer("continue");
+            }
+            else
+            {
+                Check();
+            }
+        }
+
         #endregion
     }
 }
