@@ -156,7 +156,7 @@ namespace Tests.test
             q1.Answer = new List<Answer_Сouples>{
                 new Answer_Сouples() {Question="Кот говорит",Answer="Мяу"},
                 new Answer_Сouples() {Question="Пес говорт",Answer="Гав" }
-            };
+            };            
             drag_And_Drop.Add(q1);
             Drag_And_Drop q2 = new Drag_And_Drop();
             q2.Question = "Сопоставьте математические операции и их названия";
@@ -165,7 +165,7 @@ namespace Tests.test
                 new Answer_Сouples() {Question="*",Answer="Умножить"},
                 new Answer_Сouples() {Question="+",Answer="Сложить" },
                 new Answer_Сouples() {Question="-",Answer="Отнять" }
-            };
+            };            
             drag_And_Drop.Add(q2);
             Drag_And_Drop q3 = new Drag_And_Drop();
             q3.Question = "Сопоставьте страны и языки на которых они говорят";
@@ -175,7 +175,7 @@ namespace Tests.test
                 new Answer_Сouples() {Question="Франция",Answer="Французский" },
                 new Answer_Сouples() {Question="Германия",Answer="Немецкий" },
                 new Answer_Сouples() {Question="Польша",Answer="Польский" }
-            };
+            };            
             drag_And_Drop.Add(q3);
             Drag_And_Drop q4 = new Drag_And_Drop();
             q4.Question = "Сопоставьте выражения и их значения";
@@ -200,6 +200,12 @@ namespace Tests.test
                 new Answer_Сouples() {Question="прическа",Answer="парикмахерка" }
             };
             drag_And_Drop.Add(q5);
+            for (int i = 0;i< drag_And_Drop.Count;i++)
+            {
+                drag_And_Drop[i].Answers = new List<string>();
+                for (int j = 0; j < drag_And_Drop[i].Answer.Count; j++)
+                    drag_And_Drop[i].Answers.Add(drag_And_Drop[i].Answer[j].Answer);
+            }
             return drag_And_Drop;
         }
     }

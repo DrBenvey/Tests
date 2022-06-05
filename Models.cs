@@ -55,6 +55,7 @@ namespace Tests
         public string Picture { get; set; }
         public List<Answer_Сouples> Answer { get; set; }
         public List<string> Person_Answer { get; set; }
+        public List<string> Answers { get; set; }
         public bool IsRight { get; set; }
     }
     class Test

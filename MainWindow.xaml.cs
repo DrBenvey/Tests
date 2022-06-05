@@ -36,16 +36,16 @@ namespace Tests
             Get_choose_content();
         }
 
-        private void lbl1_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            TextBlock lbl = (TextBlock)sender;
-            DragDrop.DoDragDrop(lbl, lbl.Text, DragDropEffects.Copy);
-        }
+        //private void lbl1_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    TextBlock lbl = (TextBlock)sender;
+        //    DragDrop.DoDragDrop(lbl, lbl.Text, DragDropEffects.Copy);
+        //}
 
-        private void txtTarget_Drop(object sender, DragEventArgs e)
-        {
-            ((TextBlock)sender).Text = (string)e.Data.GetData(DataFormats.Text);
-        }
+        //private void txtTarget_Drop(object sender, DragEventArgs e)
+        //{
+        //    ((TextBlock)sender).Text = (string)e.Data.GetData(DataFormats.Text);
+        //}
 
         /// <summary>
         /// подгрузка названий для кнопок, 
@@ -669,7 +669,7 @@ namespace Tests
                     else
                     {
                         Image_question_drag_and_drop_image.Visibility = Visibility.Visible;
-                        Image_question_drag_and_drop_image.Source = new BitmapImage(new Uri(test.Some_Correct_Questions[question_counter.Question_id].Picture, UriKind.Relative));
+                        Image_question_drag_and_drop_image.Source = new BitmapImage(new Uri(test.Drag_And_Drop_Questions[question_counter.Question_id].Picture, UriKind.Relative));
                     }                   
 
                     switch (test.Drag_And_Drop_Questions[question_counter.Question_id].Answer.Count)
@@ -679,9 +679,9 @@ namespace Tests
                             Border_question_drag_and_drop_1.Visibility = Visibility.Visible;
                             Border_answer_drag_and_drop_2.Visibility = Visibility.Visible;
                             Border_question_drag_and_drop_2.Visibility = Visibility.Visible;
-                            TextBlock_answer_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Answer;
+                            TextBlock_answer_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[0];
                             TextBlock_info_question_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Question;
-                            TextBlock_answer_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Answer;
+                            TextBlock_answer_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[1];
                             TextBlock_info_question_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Question;
                             Border_answer_drag_and_drop_3.Visibility = Visibility.Collapsed;
                             Border_question_drag_and_drop_3.Visibility = Visibility.Collapsed;
@@ -699,11 +699,11 @@ namespace Tests
                             Border_question_drag_and_drop_2.Visibility = Visibility.Visible;
                             Border_answer_drag_and_drop_3.Visibility = Visibility.Visible;
                             Border_question_drag_and_drop_3.Visibility = Visibility.Visible;
-                            TextBlock_answer_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Answer;
+                            TextBlock_answer_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[0];
                             TextBlock_info_question_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Question;
-                            TextBlock_answer_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Answer;
+                            TextBlock_answer_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[1];
                             TextBlock_info_question_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Question;
-                            TextBlock_answer_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[2].Answer;
+                            TextBlock_answer_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[2];
                             TextBlock_info_question_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[2].Question;
                             Border_answer_drag_and_drop_4.Visibility = Visibility.Collapsed;
                             Border_question_drag_and_drop_4.Visibility = Visibility.Collapsed;
@@ -721,13 +721,13 @@ namespace Tests
                             Border_question_drag_and_drop_3.Visibility = Visibility.Visible;
                             Border_answer_drag_and_drop_4.Visibility = Visibility.Visible;
                             Border_question_drag_and_drop_4.Visibility = Visibility.Visible;
-                            TextBlock_answer_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Answer;
+                            TextBlock_answer_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[0];
                             TextBlock_info_question_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Question;
-                            TextBlock_answer_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Answer;
+                            TextBlock_answer_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[1];
                             TextBlock_info_question_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Question;
-                            TextBlock_answer_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[2].Answer;
+                            TextBlock_answer_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[2];
                             TextBlock_info_question_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[2].Question;
-                            TextBlock_answer_drag_and_drop_4.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[3].Answer;
+                            TextBlock_answer_drag_and_drop_4.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[3];
                             TextBlock_info_question_drag_and_drop_4.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[3].Question;
                             Border_answer_drag_and_drop_5.Visibility = Visibility.Collapsed;
                             Border_question_drag_and_drop_5.Visibility = Visibility.Collapsed;
@@ -745,15 +745,15 @@ namespace Tests
                             Border_question_drag_and_drop_4.Visibility = Visibility.Visible;
                             Border_answer_drag_and_drop_5.Visibility = Visibility.Visible;
                             Border_question_drag_and_drop_5.Visibility = Visibility.Visible;
-                            TextBlock_answer_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Answer;
+                            TextBlock_answer_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[0];
                             TextBlock_info_question_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Question;
-                            TextBlock_answer_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Answer;
+                            TextBlock_answer_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[1];
                             TextBlock_info_question_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Question;
-                            TextBlock_answer_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[2].Answer;
+                            TextBlock_answer_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[2];
                             TextBlock_info_question_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[2].Question;
-                            TextBlock_answer_drag_and_drop_4.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[3].Answer;
+                            TextBlock_answer_drag_and_drop_4.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[3];
                             TextBlock_info_question_drag_and_drop_4.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[3].Question;
-                            TextBlock_answer_drag_and_drop_5.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[4].Answer;
+                            TextBlock_answer_drag_and_drop_5.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[4];
                             TextBlock_info_question_drag_and_drop_5.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[4].Question;
                             Border_answer_drag_and_drop_6.Visibility = Visibility.Collapsed;
                             Border_question_drag_and_drop_6.Visibility = Visibility.Collapsed;
@@ -771,23 +771,28 @@ namespace Tests
                             Border_question_drag_and_drop_5.Visibility = Visibility.Visible;
                             Border_answer_drag_and_drop_6.Visibility = Visibility.Visible;
                             Border_question_drag_and_drop_6.Visibility = Visibility.Visible;
-                            TextBlock_answer_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Answer;
+                            TextBlock_answer_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[0];
                             TextBlock_info_question_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Question;
-                            TextBlock_answer_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Answer;
+                            TextBlock_answer_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[1];
                             TextBlock_info_question_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Question;
-                            TextBlock_answer_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[2].Answer;
+                            TextBlock_answer_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[2];
                             TextBlock_info_question_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[2].Question;
-                            TextBlock_answer_drag_and_drop_4.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[3].Answer;
+                            TextBlock_answer_drag_and_drop_4.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[3];
                             TextBlock_info_question_drag_and_drop_4.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[3].Question;
-                            TextBlock_answer_drag_and_drop_5.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[4].Answer;
+                            TextBlock_answer_drag_and_drop_5.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[4];
                             TextBlock_info_question_drag_and_drop_5.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[4].Question;
-                            TextBlock_answer_drag_and_drop_6.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[5].Answer;
+                            TextBlock_answer_drag_and_drop_6.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answers[5];
                             TextBlock_info_question_drag_and_drop_6.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[5].Question;
                             break;
                     }
                     if (test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer != null)
                     {
-                        //todo show old answer
+                        TextBlock_question_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer[0];
+                        TextBlock_question_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer[1];
+                        TextBlock_question_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer[2];
+                        TextBlock_question_drag_and_drop_4.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer[3];
+                        TextBlock_question_drag_and_drop_5.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer[4];
+                        TextBlock_question_drag_and_drop_6.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer[5];
                     }
                     if (Button_finish.IsEnabled)
                     {
