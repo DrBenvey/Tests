@@ -88,10 +88,7 @@ namespace Tests
                     ScrollViewer_main.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;                    
                     StackPanel_test_choose.Visibility = Visibility.Collapsed; 
                     StackPanel_main.Visibility = Visibility.Visible;
-                    StackPanel_test_navidation.Visibility = Visibility.Visible;
-                    TextBlock_test_result.Visibility = Visibility.Collapsed;
-                    TextBlock_test_result.Text = "";
-                    Button_finish.IsEnabled = true;
+                    StackPanel_test_navidation.Visibility = Visibility.Visible;                    
                     break;
             }
         }
@@ -115,6 +112,32 @@ namespace Tests
         /// <param name="Test_Option"></param>
         public void UploadTest(string Test_Option)
         {
+            TextBlock_test_result.Visibility = Visibility.Collapsed;
+            TextBlock_test_result.Text = "";
+            Button_finish.IsEnabled = true;
+
+            RadioButton_question_one_correct_answer_1.IsEnabled = true;
+            RadioButton_question_one_correct_answer_2.IsEnabled = true;
+            RadioButton_question_one_correct_answer_3.IsEnabled = true;
+            RadioButton_question_one_correct_answer_4.IsEnabled = true;
+            RadioButton_question_one_correct_answer_5.IsEnabled = true;
+            RadioButton_question_one_correct_answer_6.IsEnabled = true;
+
+            CheckBox_question_some_correct_answer_1.IsEnabled = true;
+            CheckBox_question_some_correct_answer_2.IsEnabled = true;
+            CheckBox_question_some_correct_answer_3.IsEnabled = true;
+            CheckBox_question_some_correct_answer_4.IsEnabled = true;
+            CheckBox_question_some_correct_answer_5.IsEnabled = true;
+            CheckBox_question_some_correct_answer_6.IsEnabled = true;
+
+            TextBox_question_input_word_answer_1.IsEnabled = true;
+            TextBox_question_input_word_answer_2.IsEnabled = true;
+            TextBox_question_input_word_answer_3.IsEnabled = true;
+
+            //todo
+
+            _resources = new Resources();
+
             if (Test_Option == null)
                 return;
 
@@ -183,6 +206,7 @@ namespace Tests
             TextBox_question_input_word_answer_1.Text = "";
             TextBox_question_input_word_answer_2.Text = "";
             TextBox_question_input_word_answer_3.Text = "";
+
             //todo
         }
         /// <summary>
@@ -337,11 +361,8 @@ namespace Tests
                             RadioButton_question_one_correct_answer_6.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[5].Answer;
                             break;
                     }
-                    if (!test.One_Correct_Questions[question_counter.Question_id].Person_Answer.HasValue)
-                        Border_question_one_correct.Background = new SolidColorBrush(Colors.LightGray);
-                    else
+                    if (test.One_Correct_Questions[question_counter.Question_id].Person_Answer.HasValue)                        
                     {
-                        Border_question_one_correct.Background = new SolidColorBrush(Colors.Fuchsia);
                         switch (test.One_Correct_Questions[question_counter.Question_id].Person_Answer.Value)
                         {
                             case 0:
@@ -363,6 +384,20 @@ namespace Tests
                                 RadioButton_question_one_correct_answer_6.IsChecked = true;
                                 break;
                         }
+                    }
+                    if (Button_finish.IsEnabled)
+                    {
+                        if (!test.One_Correct_Questions[question_counter.Question_id].Person_Answer.HasValue)
+                            Border_question_one_correct.Background = new SolidColorBrush(Colors.LightGray);
+                        else
+                            Border_question_one_correct.Background = new SolidColorBrush(Colors.Fuchsia);
+                    }
+                    else
+                    {
+                        if (test.One_Correct_Questions[question_counter.Question_id].IsRight)
+                            Border_question_one_correct.Background = new SolidColorBrush(Colors.LightGreen);
+                        else
+                            Border_question_one_correct.Background = new SolidColorBrush(Colors.Coral);
                     }
                     break;
                 case 1:                    
@@ -425,11 +460,9 @@ namespace Tests
                             CheckBox_question_some_correct_answer_6.Content = test.Some_Correct_Questions[question_counter.Question_id].Answer_Option[5].Answer;
                             break;
                     }
-                    if (test.Some_Correct_Questions[question_counter.Question_id].Person_Answer==null)
-                        Border_question_some_correct.Background = new SolidColorBrush(Colors.LightGray);
-                    else
-                    {
-                        Border_question_some_correct.Background = new SolidColorBrush(Colors.Fuchsia);
+                    if (test.Some_Correct_Questions[question_counter.Question_id].Person_Answer!=null)
+                    { 
+                        
                         if (test.Some_Correct_Questions[question_counter.Question_id].Person_Answer.IndexOf(0)>-1)
                             CheckBox_question_some_correct_answer_1.IsChecked = true;
                         if (test.Some_Correct_Questions[question_counter.Question_id].Person_Answer.IndexOf(1) > -1)
@@ -442,6 +475,20 @@ namespace Tests
                             CheckBox_question_some_correct_answer_5.IsChecked = true;
                         if (test.Some_Correct_Questions[question_counter.Question_id].Person_Answer.IndexOf(5) > -1)
                             CheckBox_question_some_correct_answer_6.IsChecked = true;
+                    }
+                    if (Button_finish.IsEnabled)
+                    {
+                        if (test.Some_Correct_Questions[question_counter.Question_id].Person_Answer == null)
+                            Border_question_some_correct.Background = new SolidColorBrush(Colors.LightGray);
+                        else
+                            Border_question_some_correct.Background = new SolidColorBrush(Colors.Fuchsia);
+                    }
+                    else
+                    {
+                        if (test.Some_Correct_Questions[question_counter.Question_id].IsRight)
+                            Border_question_some_correct.Background = new SolidColorBrush(Colors.LightGreen);
+                        else
+                            Border_question_some_correct.Background = new SolidColorBrush(Colors.Coral);
                     }
                     break;
                 case 2:                    
@@ -485,14 +532,26 @@ namespace Tests
                             TextBlock_question_input_word_question_4.Text = test.Input_Word_Questions[question_counter.Question_id].Question[3];
                             break;
                     }
-                    if (test.Some_Correct_Questions[question_counter.Question_id].Person_Answer == null)
-                        Border_question_input_word.Background = new SolidColorBrush(Colors.LightGray);
-                    else
+                    if (test.Input_Word_Questions[question_counter.Question_id].Person_Answer != null)
                     {
-                        Border_question_input_word.Background = new SolidColorBrush(Colors.Fuchsia);
+                        
                         TextBox_question_input_word_answer_1.Text = test.Input_Word_Questions[question_counter.Question_id].Person_Answer[0];
                         TextBox_question_input_word_answer_2.Text = test.Input_Word_Questions[question_counter.Question_id].Person_Answer[1];
                         TextBox_question_input_word_answer_3.Text = test.Input_Word_Questions[question_counter.Question_id].Person_Answer[2];
+                    }
+                    if (Button_finish.IsEnabled)
+                    {
+                        if (test.Input_Word_Questions[question_counter.Question_id].Person_Answer == null)
+                            Border_question_input_word.Background = new SolidColorBrush(Colors.LightGray);
+                        else
+                            Border_question_input_word.Background = new SolidColorBrush(Colors.Fuchsia);
+                    }
+                    else
+                    {
+                        if (test.Input_Word_Questions[question_counter.Question_id].IsRight)
+                            Border_question_input_word.Background = new SolidColorBrush(Colors.LightGreen);
+                        else
+                            Border_question_input_word.Background = new SolidColorBrush(Colors.Coral);
                     }
                     break;
                 case 3:
@@ -505,44 +564,34 @@ namespace Tests
         {
             Button_finish.IsEnabled = false;
             Timer("pause");
-            
-            test= _test_navigation.CheckTest(test);
+
+            RadioButton_question_one_correct_answer_1.IsEnabled = false;
+            RadioButton_question_one_correct_answer_2.IsEnabled = false;
+            RadioButton_question_one_correct_answer_3.IsEnabled = false;
+            RadioButton_question_one_correct_answer_4.IsEnabled = false;
+            RadioButton_question_one_correct_answer_5.IsEnabled = false;
+            RadioButton_question_one_correct_answer_6.IsEnabled = false;
+
+            CheckBox_question_some_correct_answer_1.IsEnabled = false;
+            CheckBox_question_some_correct_answer_2.IsEnabled = false;
+            CheckBox_question_some_correct_answer_3.IsEnabled = false;
+            CheckBox_question_some_correct_answer_4.IsEnabled = false;
+            CheckBox_question_some_correct_answer_5.IsEnabled = false;
+            CheckBox_question_some_correct_answer_6.IsEnabled = false;
+
+            TextBox_question_input_word_answer_1.IsEnabled = false;
+            TextBox_question_input_word_answer_2.IsEnabled = false;
+            TextBox_question_input_word_answer_3.IsEnabled = false;
+
+            //todo
+
+            test = _test_navigation.CheckTest(test);
             int correct_answers = _test_navigation.CountCorrectAnswers(test);
 
             TextBlock_test_result.Visibility = Visibility.Visible;
             TextBlock_test_result.Text = _resources.Get_TextBlock_Test_Result_Value(correct_answers);
 
             ShowQuestion();
-
-            //if (RadioButton_question_one_correct_answer_1.IsChecked == true)
-            //{
-            //    correct_answers++;
-            //    Border_question_one_correct.Background = new SolidColorBrush(Colors.LightGreen);
-            //}
-            //else
-            //{
-            //    Border_question_one_correct.Background = new SolidColorBrush(Colors.Coral);
-            //}            
-            //if (CheckBox_question_some_correct_answer_1.IsChecked == true && CheckBox_question_some_correct_answer_2.IsChecked == false && CheckBox_question_some_correct_answer_3.IsChecked == true && CheckBox_question_some_correct_answer_4.IsChecked == false && CheckBox_question_some_correct_answer_5.IsChecked == false)
-            //{
-            //    correct_answers++;
-            //    Border_question_some_correct.Background = new SolidColorBrush(Colors.LightGreen);
-            //}
-            //else
-            //{
-            //    Border_question_some_correct.Background = new SolidColorBrush(Colors.Coral);
-            //}           
-            //if (TextBox_question_input_word_answer_1.Text == "тигр" && TextBox_question_input_word_answer_2.Text == "семейства кошачьих")
-            //{
-            //    correct_answers++;
-            //    Border_question_input_word.Background = new SolidColorBrush(Colors.LightGreen);
-            //}
-            //else
-            //{
-            //    Border_question_input_word.Background = new SolidColorBrush(Colors.Coral);
-            //}
-
-
         }
 
         #region Timer
@@ -603,7 +652,8 @@ namespace Tests
         /// <param name="e"></param>
         private void Button_right_Click(object sender, RoutedEventArgs e)
         {
-            SaveIt();
+            if (Button_finish.IsEnabled)
+                SaveIt();
             question_counter = question_counter_after;
             ShowQuestion();
         }
@@ -614,7 +664,8 @@ namespace Tests
         /// <param name="e"></param>
         private void Button_left_Click(object sender, RoutedEventArgs e)
         {
-            SaveIt();
+            if (Button_finish.IsEnabled)
+                SaveIt();
             question_counter = question_counter_before;
             ShowQuestion();
         }
@@ -635,9 +686,9 @@ namespace Tests
             }
             else
             {
+                Timer("pause");
                 Timer("start");
-                //todo
-                //UploadData();
+                UploadTest(test.Name);
             }
         }
 
