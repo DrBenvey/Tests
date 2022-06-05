@@ -26,6 +26,7 @@ namespace Tests
         public string Picture { get; set; }
         public List<Answer_Option> Answer_Option { get; set; }
         public int? Person_Answer { get; set; }
+        public bool IsRight { get; set; }
     }
     class Some_Correct
     {
@@ -33,6 +34,7 @@ namespace Tests
         public string Picture { get; set; }
         public List<Answer_Option> Answer_Option { get; set; }
         public List<int> Person_Answer { get; set; }
+        public bool IsRight { get; set; }
     }
     class Input_Word
     {
@@ -40,6 +42,7 @@ namespace Tests
         public string Picture { get; set; }
         public List<string> Answer { get; set; }
         public List<string> Person_Answer { get; set; }
+        public bool IsRight { get; set; }
 
     }
     class Drag_And_Drop

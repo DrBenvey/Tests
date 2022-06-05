@@ -6,6 +6,105 @@ namespace Tests.test
 {
     class test_navigation
     {
+        // Число правильных ответов
+        public int CountCorrectAnswers(Test test)
+        {
+            int count = 0;
+            for (int i = 0; i < test.One_Correct_Questions.Count; i++)
+            {
+                if (test.One_Correct_Questions[i].IsRight)
+                    count++;
+            }
+            for (int i = 0; i < test.Some_Correct_Questions.Count; i++)
+            {
+                if (test.Some_Correct_Questions[i].IsRight)
+                    count++;                
+            }
+            for (int i = 0; i < test.Input_Word_Questions.Count; i++)
+            {
+                if (test.Input_Word_Questions[i].IsRight)
+                    count++;
+            }
+            //todo
+            return count;
+        }
+        //Проверка теста
+        public Test CheckTest(Test test)
+        {
+            Test checked_test = test;
+            for (int i = 0; i < test.One_Correct_Questions.Count; i++)
+            {
+                if (!test.One_Correct_Questions[i].Person_Answer.HasValue)
+                    checked_test.One_Correct_Questions[i].IsRight = false;
+                else
+                {
+                    if (checked_test.One_Correct_Questions[i].Answer_Option[test.One_Correct_Questions[i].Person_Answer.Value].IsCorrect)
+                        checked_test.One_Correct_Questions[i].IsRight = true;
+                    else
+                        checked_test.One_Correct_Questions[i].IsRight = false;
+                }
+            }
+            for (int i = 0; i < test.Some_Correct_Questions.Count; i++)
+            {
+                if (checked_test.Some_Correct_Questions[i].Person_Answer==null)
+                    checked_test.Some_Correct_Questions[i].IsRight = false;
+                else
+                {
+                    int tmp_right_amount = 0;
+                    bool tmp = true;
+                    for (int j = 0; j < test.Some_Correct_Questions[i].Answer_Option.Count; j++)
+                    {
+                        if (test.Some_Correct_Questions[i].Answer_Option[j].IsCorrect)
+                        {
+                            tmp_right_amount++;
+                            if (test.Some_Correct_Questions[i].Person_Answer.IndexOf(j) < 0)
+                                tmp = false;
+                        }
+                    }
+                    if (test.Some_Correct_Questions[i].Person_Answer.Count != tmp_right_amount)
+                        tmp = false;
+                    checked_test.Some_Correct_Questions[i].IsRight = tmp;
+                }                
+            }
+            for (int i = 0; i < test.Input_Word_Questions.Count; i++)
+            {
+                if (test.Input_Word_Questions[i].Person_Answer==null)
+                    checked_test.Input_Word_Questions[i].IsRight = false;
+                else
+                {
+                    bool tmp = true;
+                    for (int j = 0; j < test.Input_Word_Questions[i].Answer.Count; j++)
+                    {
+                        if (test.Input_Word_Questions[i].Person_Answer[j]!= test.Input_Word_Questions[i].Answer[j])
+                            tmp = false;
+                    }
+                    checked_test.Input_Word_Questions[i].IsRight = tmp;
+                }                                
+            }
+            //todo
+            return checked_test;
+        }
+        //остались ли неотвеченные вопросы
+        public bool IsTestCompleted(Test test)
+        {
+            for (int i = 0;i<test.One_Correct_Questions.Count;i++)
+            {
+                if (!test.One_Correct_Questions[i].Person_Answer.HasValue)
+                    return false;
+            }
+            for (int i = 0; i < test.Some_Correct_Questions.Count; i++)
+            {
+                if (test.Some_Correct_Questions[i].Person_Answer==null)
+                    return false;
+            }
+            for (int i = 0; i < test.Input_Word_Questions.Count; i++)
+            {
+                if (test.Input_Word_Questions[i].Person_Answer == null)
+                    return false;
+            }
+            //todo
+            return true;
+        }
         //пулучение номера первого вопроса теста
         public QuestionCounter GetFirstOrNullQuestion(Test test)
         {

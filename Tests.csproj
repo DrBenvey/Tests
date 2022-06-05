@@ -48,6 +48,7 @@
     </ApplicationDefinition>
     <Compile Include="Models.cs" />
     <Compile Include="Resources.cs" />
+    <Compile Include="test\demo_test.cs" />
     <Compile Include="test\get_tests.cs" />
     <Compile Include="test\shuffle_test_questions.cs" />
     <Compile Include="test\test_navigation.cs" />

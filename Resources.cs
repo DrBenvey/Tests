@@ -26,8 +26,6 @@ namespace Tests
                     tmp= _shuffle_test_questions.GetShuffledTest(test);
                     this_test= tmp;
                     return tmp;
-                    //this_test=test;
-                    //return test;
                 }
 
             }
@@ -84,6 +82,10 @@ namespace Tests
         public string Get_TextBlock_Finish_Value()
         {
             return "Закончить и проверить";
+        }
+        public string Get_MessageBox_Finish_Not_Completed_Value()
+        {
+            return "У Вас есть пропущенные вопросы (вопросы без ответа).\nВы уверены, что хотите закончить работу и отправить ее на проверку?\nПосле этого вносить изменения будет нельзя.";
         }
         public string Get_MessageBox_Finish_Value()
         {

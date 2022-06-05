@@ -9,20 +9,21 @@ namespace Tests.test
         static Random rnd = new Random();
         public Test GetShuffledTest(Test test)
         {
-            Test sh_Test=new Test();
-            sh_Test.Name = test.Name;
-            sh_Test.One_Correct_Questions = Randomize<One_Correct>(test.One_Correct_Questions);
-            for (int i = 0; i < test.One_Correct_Questions.Count; i++)
-                sh_Test.One_Correct_Questions[i].Answer_Option = Randomize<Answer_Option>(sh_Test.One_Correct_Questions[i].Answer_Option);
-            sh_Test.Some_Correct_Questions = Randomize<Some_Correct>(test.Some_Correct_Questions);
-            for (int i = 0; i < test.Some_Correct_Questions.Count; i++)
-                sh_Test.Some_Correct_Questions[i].Answer_Option = Randomize<Answer_Option>(sh_Test.Some_Correct_Questions[i].Answer_Option);
-            sh_Test.Input_Word_Questions= Randomize<Input_Word>(test.Input_Word_Questions);
-            for (int i = 0; i < test.Input_Word_Questions.Count; i++)
-                sh_Test.Input_Word_Questions[i].Answer = Randomize<string>(sh_Test.Input_Word_Questions[i].Answer);
-            sh_Test.Drag_And_Drop_Questions = Randomize<Drag_And_Drop>(test.Drag_And_Drop_Questions);
-            
-            return sh_Test;
+            Test sh_Test_Random_Questions = new Test();
+            sh_Test_Random_Questions.Name = test.Name;
+            sh_Test_Random_Questions.One_Correct_Questions = Randomize<One_Correct>(test.One_Correct_Questions);
+            sh_Test_Random_Questions.Some_Correct_Questions = Randomize<Some_Correct>(test.Some_Correct_Questions);
+            sh_Test_Random_Questions.Input_Word_Questions= Randomize<Input_Word>(test.Input_Word_Questions);
+            sh_Test_Random_Questions.Drag_And_Drop_Questions = Randomize<Drag_And_Drop>(test.Drag_And_Drop_Questions);
+            Test sh_Test_Random_Questions_Random_Answers = new Test();
+            sh_Test_Random_Questions_Random_Answers= sh_Test_Random_Questions;
+            for (int i = 0; i < sh_Test_Random_Questions.One_Correct_Questions.Count; i++)
+                sh_Test_Random_Questions_Random_Answers.One_Correct_Questions[i].Answer_Option = Randomize<Answer_Option>(sh_Test_Random_Questions.One_Correct_Questions[i].Answer_Option);
+            for (int i = 0; i < sh_Test_Random_Questions.Some_Correct_Questions.Count; i++)
+                sh_Test_Random_Questions_Random_Answers.Some_Correct_Questions[i].Answer_Option = Randomize<Answer_Option>(sh_Test_Random_Questions.Some_Correct_Questions[i].Answer_Option);
+            for (int i = 0; i < sh_Test_Random_Questions.Input_Word_Questions.Count; i++)
+                sh_Test_Random_Questions_Random_Answers.Input_Word_Questions[i].Answer = Randomize<string>(sh_Test_Random_Questions.Input_Word_Questions[i].Answer);
+            return sh_Test_Random_Questions_Random_Answers;
         }
         public static List<T> Randomize<T>(List<T> list)
         {
