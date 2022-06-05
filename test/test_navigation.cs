@@ -25,7 +25,11 @@ namespace Tests.test
                 if (test.Input_Word_Questions[i].IsRight)
                     count++;
             }
-            //todo
+            for (int i = 0; i < test.Drag_And_Drop_Questions.Count; i++)
+            {
+                if (test.Drag_And_Drop_Questions[i].IsRight)
+                    count++;
+            }
             return count;
         }
         //Проверка теста
@@ -81,7 +85,21 @@ namespace Tests.test
                     checked_test.Input_Word_Questions[i].IsRight = tmp;
                 }                                
             }
-            //todo
+            for (int i = 0; i < test.Drag_And_Drop_Questions.Count; i++)
+            {
+                if (test.Drag_And_Drop_Questions[i].Person_Answer == null)
+                    checked_test.Drag_And_Drop_Questions[i].IsRight = false;
+                else
+                {
+                    bool tmp = true;
+                    for (int j = 0;j< checked_test.Drag_And_Drop_Questions[i].Answer.Count;j++)
+                    {
+                        if (checked_test.Drag_And_Drop_Questions[i].Answer[j].Answer!= checked_test.Drag_And_Drop_Questions[i].Person_Answer[j])
+                            tmp = false;
+                    }
+                    checked_test.Drag_And_Drop_Questions[i].IsRight = tmp;
+                }
+            }
             return checked_test;
         }
         //остались ли неотвеченные вопросы
@@ -102,7 +120,11 @@ namespace Tests.test
                 if (test.Input_Word_Questions[i].Person_Answer == null)
                     return false;
             }
-            //todo
+            for (int i = 0; i < test.Drag_And_Drop_Questions.Count; i++)
+            {
+                if (test.Drag_And_Drop_Questions[i].Person_Answer==null)
+                    return false;
+            }
             return true;
         }
         //пулучение номера первого вопроса теста

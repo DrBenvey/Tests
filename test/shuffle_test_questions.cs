@@ -21,6 +21,8 @@ namespace Tests.test
                 sh_Test_Random_Questions_Random_Answers.One_Correct_Questions[i].Answer_Option = Randomize<Answer_Option>(sh_Test_Random_Questions.One_Correct_Questions[i].Answer_Option);
             for (int i = 0; i < sh_Test_Random_Questions.Some_Correct_Questions.Count; i++)
                 sh_Test_Random_Questions_Random_Answers.Some_Correct_Questions[i].Answer_Option = Randomize<Answer_Option>(sh_Test_Random_Questions.Some_Correct_Questions[i].Answer_Option);
+            for (int i = 0; i < sh_Test_Random_Questions.Drag_And_Drop_Questions.Count; i++)
+                sh_Test_Random_Questions_Random_Answers.Drag_And_Drop_Questions[i].Answer = Randomize<Answer_Сouples>(sh_Test_Random_Questions_Random_Answers.Drag_And_Drop_Questions[i].Answer);
             return sh_Test_Random_Questions_Random_Answers;
         }
         public static List<T> Randomize<T>(List<T> list)

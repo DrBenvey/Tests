@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -36,6 +36,17 @@ namespace Tests
             Get_choose_content();
         }
 
+        private void lbl1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBlock lbl = (TextBlock)sender;
+            DragDrop.DoDragDrop(lbl, lbl.Text, DragDropEffects.Copy);
+        }
+
+        private void txtTarget_Drop(object sender, DragEventArgs e)
+        {
+            ((TextBlock)sender).Text = (string)e.Data.GetData(DataFormats.Text);
+        }
+
         /// <summary>
         /// подгрузка названий для кнопок, 
         /// вариантов выбора теста
@@ -54,6 +65,7 @@ namespace Tests
             TextBlock_finish.Text = _resources.Get_TextBlock_Finish_Value();
             TextBlock_question_info_some_correct.Text = _resources.Get_TextBlock_Question_Info_Some_Correct_Value();
             TextBlock_question_info_input_word.Text = _resources.Get_TextBlock_Question_Info_Input_Word_Value();
+            TextBlock_question_info_drag_and_drop.Text = _resources.Get_TextBlock_Question_Info_Drag_And_Drop_Value();
             TextBlock_left.Text = _resources.Get_TextBlock_Left_Value();
             TextBlock_right.Text = _resources.Get_TextBlock_Right_Value();
 
@@ -134,7 +146,13 @@ namespace Tests
             TextBox_question_input_word_answer_2.IsEnabled = true;
             TextBox_question_input_word_answer_3.IsEnabled = true;
 
-            //todo
+            TextBlock_question_drag_and_drop_1.AllowDrop = true;
+            TextBlock_question_drag_and_drop_2.AllowDrop = true;
+            TextBlock_question_drag_and_drop_3.AllowDrop = true;
+            TextBlock_question_drag_and_drop_4.AllowDrop = true;
+            TextBlock_question_drag_and_drop_5.AllowDrop = true;
+            TextBlock_question_drag_and_drop_6.AllowDrop = true;
+
 
             _resources = new Resources();
 
@@ -157,30 +175,47 @@ namespace Tests
         /// </summary>
         public void ShowPartTest()
         {
-            Border_question_info_one_correct.Visibility = Visibility.Collapsed;
-            Border_question_one_correct.Visibility = Visibility.Collapsed;
-            Border_question_info_some_correct.Visibility = Visibility.Collapsed;
-            Border_question_some_correct.Visibility = Visibility.Collapsed;
-            Border_question_info_input_word.Visibility = Visibility.Collapsed;
-            Border_question_input_word.Visibility = Visibility.Collapsed;
-            //todo
-
             switch (question_counter.Part_id)
             {
                 case 0:
                     Border_question_info_one_correct.Visibility = Visibility.Visible;
                     Border_question_one_correct.Visibility = Visibility.Visible;
+                    Border_question_info_some_correct.Visibility = Visibility.Collapsed;
+                    Border_question_some_correct.Visibility = Visibility.Collapsed;
+                    Border_question_info_input_word.Visibility = Visibility.Collapsed;
+                    Border_question_input_word.Visibility = Visibility.Collapsed;
+                    Border_question_info_drag_and_drop.Visibility = Visibility.Collapsed;
+                    Border_question_drag_and_drop.Visibility = Visibility.Collapsed;
                     break;
                 case 1:
+                    Border_question_info_one_correct.Visibility = Visibility.Collapsed;
+                    Border_question_one_correct.Visibility = Visibility.Collapsed;
                     Border_question_info_some_correct.Visibility = Visibility.Visible;
                     Border_question_some_correct.Visibility = Visibility.Visible;
+                    Border_question_info_input_word.Visibility = Visibility.Collapsed;
+                    Border_question_input_word.Visibility = Visibility.Collapsed;
+                    Border_question_info_drag_and_drop.Visibility = Visibility.Collapsed;
+                    Border_question_drag_and_drop.Visibility = Visibility.Collapsed;
                     break;
                 case 2:
+                    Border_question_info_one_correct.Visibility = Visibility.Collapsed;
+                    Border_question_one_correct.Visibility = Visibility.Collapsed;
+                    Border_question_info_some_correct.Visibility = Visibility.Collapsed;
+                    Border_question_some_correct.Visibility = Visibility.Collapsed;
                     Border_question_info_input_word.Visibility = Visibility.Visible;
                     Border_question_input_word.Visibility = Visibility.Visible;
+                    Border_question_info_drag_and_drop.Visibility = Visibility.Collapsed;
+                    Border_question_drag_and_drop.Visibility = Visibility.Collapsed;
                     break;
                 case 3:
-                    //todo
+                    Border_question_info_one_correct.Visibility = Visibility.Collapsed;
+                    Border_question_one_correct.Visibility = Visibility.Collapsed;
+                    Border_question_info_some_correct.Visibility = Visibility.Collapsed;
+                    Border_question_some_correct.Visibility = Visibility.Collapsed;
+                    Border_question_info_input_word.Visibility = Visibility.Collapsed;
+                    Border_question_input_word.Visibility = Visibility.Collapsed;
+                    Border_question_info_drag_and_drop.Visibility = Visibility.Visible;
+                    Border_question_drag_and_drop.Visibility = Visibility.Visible;
                     break;
             }
         }
@@ -207,7 +242,12 @@ namespace Tests
             TextBox_question_input_word_answer_2.Text = "";
             TextBox_question_input_word_answer_3.Text = "";
 
-            //todo
+            TextBlock_question_drag_and_drop_1.Text = "";
+            TextBlock_question_drag_and_drop_2.Text = "";
+            TextBlock_question_drag_and_drop_3.Text = "";
+            TextBlock_question_drag_and_drop_4.Text = "";
+            TextBlock_question_drag_and_drop_5.Text = "";
+            TextBlock_question_drag_and_drop_6.Text = "";
         }
         /// <summary>
         /// Сохраняет текущий вариант ответа
@@ -266,9 +306,9 @@ namespace Tests
                     }
                     break;
                 case 2:
-                    if (TextBox_question_input_word_answer_1.Text == ""
-                        && TextBox_question_input_word_answer_2.Text == ""
-                        && TextBox_question_input_word_answer_3.Text == "")
+                    if (String.IsNullOrEmpty(TextBox_question_input_word_answer_1.Text)
+                        && String.IsNullOrEmpty(TextBox_question_input_word_answer_2.Text)
+                        && String.IsNullOrEmpty(TextBox_question_input_word_answer_3.Text))
                         test.Input_Word_Questions[question_counter.Question_id].Person_Answer = null;
                     else
                     {
@@ -288,7 +328,42 @@ namespace Tests
                     }
                     break;
                 case 3:
-                    //todo
+                    if (String.IsNullOrEmpty(TextBlock_question_drag_and_drop_1.Text)
+                        && String.IsNullOrEmpty(TextBlock_question_drag_and_drop_2.Text)
+                        && String.IsNullOrEmpty(TextBlock_question_drag_and_drop_3.Text)
+                        && String.IsNullOrEmpty(TextBlock_question_drag_and_drop_4.Text)
+                        && String.IsNullOrEmpty(TextBlock_question_drag_and_drop_5.Text)
+                        && String.IsNullOrEmpty(TextBlock_question_drag_and_drop_6.Text)
+                        )
+                        test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer = null;
+                    else
+                    {
+                        test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer = new List<string>();
+                        if (String.IsNullOrEmpty(TextBlock_question_drag_and_drop_1.Text))
+                            test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer.Add("");
+                        else
+                            test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer.Add(TextBlock_question_drag_and_drop_1.Text);
+                        if (String.IsNullOrEmpty(TextBlock_question_drag_and_drop_2.Text))
+                            test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer.Add("");
+                        else
+                            test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer.Add(TextBlock_question_drag_and_drop_2.Text);
+                        if (String.IsNullOrEmpty(TextBlock_question_drag_and_drop_3.Text))
+                            test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer.Add("");
+                        else
+                            test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer.Add(TextBlock_question_drag_and_drop_3.Text);
+                        if (String.IsNullOrEmpty(TextBlock_question_drag_and_drop_4.Text))
+                            test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer.Add("");
+                        else
+                            test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer.Add(TextBlock_question_drag_and_drop_4.Text);
+                        if (String.IsNullOrEmpty(TextBlock_question_drag_and_drop_5.Text))
+                            test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer.Add("");
+                        else
+                            test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer.Add(TextBlock_question_drag_and_drop_5.Text);
+                        if (String.IsNullOrEmpty(TextBlock_question_drag_and_drop_6.Text))
+                            test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer.Add("");
+                        else
+                            test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer.Add(TextBlock_question_drag_and_drop_6.Text);
+                    }
                     break;
             }
         }
@@ -311,16 +386,11 @@ namespace Tests
                         Image_question_one_correct_image.Source = new BitmapImage(new Uri(test.One_Correct_Questions[question_counter.Question_id].Picture, UriKind.Relative));
                     }
 
-                    RadioButton_question_one_correct_answer_1.Visibility = Visibility.Visible;
-                    RadioButton_question_one_correct_answer_2.Visibility = Visibility.Visible;
-                    RadioButton_question_one_correct_answer_3.Visibility = Visibility.Visible;
-                    RadioButton_question_one_correct_answer_4.Visibility = Visibility.Visible;
-                    RadioButton_question_one_correct_answer_5.Visibility = Visibility.Visible;
-                    RadioButton_question_one_correct_answer_6.Visibility = Visibility.Visible;
-
                     switch (test.One_Correct_Questions[question_counter.Question_id].Answer_Option.Count)
                     {
                         case 2:
+                            RadioButton_question_one_correct_answer_1.Visibility = Visibility.Visible;
+                            RadioButton_question_one_correct_answer_2.Visibility = Visibility.Visible;
                             RadioButton_question_one_correct_answer_1.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
                             RadioButton_question_one_correct_answer_2.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[1].Answer;
                             RadioButton_question_one_correct_answer_3.Visibility = Visibility.Collapsed;
@@ -329,6 +399,9 @@ namespace Tests
                             RadioButton_question_one_correct_answer_6.Visibility = Visibility.Collapsed;
                             break;
                         case 3:
+                            RadioButton_question_one_correct_answer_1.Visibility = Visibility.Visible;
+                            RadioButton_question_one_correct_answer_2.Visibility = Visibility.Visible;
+                            RadioButton_question_one_correct_answer_3.Visibility = Visibility.Visible;
                             RadioButton_question_one_correct_answer_1.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
                             RadioButton_question_one_correct_answer_2.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[1].Answer;
                             RadioButton_question_one_correct_answer_3.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[2].Answer;
@@ -337,6 +410,10 @@ namespace Tests
                             RadioButton_question_one_correct_answer_6.Visibility = Visibility.Collapsed;
                             break;
                         case 4:
+                            RadioButton_question_one_correct_answer_1.Visibility = Visibility.Visible;
+                            RadioButton_question_one_correct_answer_2.Visibility = Visibility.Visible;
+                            RadioButton_question_one_correct_answer_3.Visibility = Visibility.Visible;
+                            RadioButton_question_one_correct_answer_4.Visibility = Visibility.Visible;
                             RadioButton_question_one_correct_answer_1.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
                             RadioButton_question_one_correct_answer_2.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[1].Answer;
                             RadioButton_question_one_correct_answer_3.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[2].Answer;
@@ -345,6 +422,11 @@ namespace Tests
                             RadioButton_question_one_correct_answer_6.Visibility = Visibility.Collapsed;
                             break;
                         case 5:
+                            RadioButton_question_one_correct_answer_1.Visibility = Visibility.Visible;
+                            RadioButton_question_one_correct_answer_2.Visibility = Visibility.Visible;
+                            RadioButton_question_one_correct_answer_3.Visibility = Visibility.Visible;
+                            RadioButton_question_one_correct_answer_4.Visibility = Visibility.Visible;
+                            RadioButton_question_one_correct_answer_5.Visibility = Visibility.Visible;
                             RadioButton_question_one_correct_answer_1.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
                             RadioButton_question_one_correct_answer_2.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[1].Answer;
                             RadioButton_question_one_correct_answer_3.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[2].Answer;
@@ -353,6 +435,12 @@ namespace Tests
                             RadioButton_question_one_correct_answer_6.Visibility = Visibility.Collapsed;
                             break;
                         case 6:
+                            RadioButton_question_one_correct_answer_1.Visibility = Visibility.Visible;
+                            RadioButton_question_one_correct_answer_2.Visibility = Visibility.Visible;
+                            RadioButton_question_one_correct_answer_3.Visibility = Visibility.Visible;
+                            RadioButton_question_one_correct_answer_4.Visibility = Visibility.Visible;
+                            RadioButton_question_one_correct_answer_5.Visibility = Visibility.Visible;
+                            RadioButton_question_one_correct_answer_6.Visibility = Visibility.Visible;
                             RadioButton_question_one_correct_answer_1.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
                             RadioButton_question_one_correct_answer_2.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[1].Answer;
                             RadioButton_question_one_correct_answer_3.Content = test.One_Correct_Questions[question_counter.Question_id].Answer_Option[2].Answer;
@@ -408,18 +496,13 @@ namespace Tests
                     {
                         Image_question_some_correct_image.Visibility = Visibility.Visible;
                         Image_question_some_correct_image.Source = new BitmapImage(new Uri(test.Some_Correct_Questions[question_counter.Question_id].Picture, UriKind.Relative));
-                    }
-
-                    CheckBox_question_some_correct_answer_1.Visibility = Visibility.Visible;
-                    CheckBox_question_some_correct_answer_2.Visibility = Visibility.Visible;
-                    CheckBox_question_some_correct_answer_3.Visibility = Visibility.Visible;
-                    CheckBox_question_some_correct_answer_4.Visibility = Visibility.Visible;
-                    CheckBox_question_some_correct_answer_5.Visibility = Visibility.Visible;
-                    CheckBox_question_some_correct_answer_6.Visibility = Visibility.Visible;
+                    }                   
 
                     switch (test.Some_Correct_Questions[question_counter.Question_id].Answer_Option.Count)
                     {
                         case 2:
+                            CheckBox_question_some_correct_answer_1.Visibility = Visibility.Visible;
+                            CheckBox_question_some_correct_answer_2.Visibility = Visibility.Visible;
                             CheckBox_question_some_correct_answer_1.Content = test.Some_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
                             CheckBox_question_some_correct_answer_2.Content = test.Some_Correct_Questions[question_counter.Question_id].Answer_Option[1].Answer;
                             CheckBox_question_some_correct_answer_3.Visibility = Visibility.Collapsed;
@@ -428,6 +511,9 @@ namespace Tests
                             CheckBox_question_some_correct_answer_6.Visibility = Visibility.Collapsed;
                             break;
                         case 3:
+                            CheckBox_question_some_correct_answer_1.Visibility = Visibility.Visible;
+                            CheckBox_question_some_correct_answer_2.Visibility = Visibility.Visible;
+                            CheckBox_question_some_correct_answer_3.Visibility = Visibility.Visible;
                             CheckBox_question_some_correct_answer_1.Content = test.Some_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
                             CheckBox_question_some_correct_answer_2.Content = test.Some_Correct_Questions[question_counter.Question_id].Answer_Option[1].Answer;
                             CheckBox_question_some_correct_answer_3.Content = test.Some_Correct_Questions[question_counter.Question_id].Answer_Option[2].Answer;
@@ -436,6 +522,10 @@ namespace Tests
                             CheckBox_question_some_correct_answer_6.Visibility = Visibility.Collapsed;
                             break;
                         case 4:
+                            CheckBox_question_some_correct_answer_1.Visibility = Visibility.Visible;
+                            CheckBox_question_some_correct_answer_2.Visibility = Visibility.Visible;
+                            CheckBox_question_some_correct_answer_3.Visibility = Visibility.Visible;
+                            CheckBox_question_some_correct_answer_4.Visibility = Visibility.Visible;
                             CheckBox_question_some_correct_answer_1.Content = test.Some_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
                             CheckBox_question_some_correct_answer_2.Content = test.Some_Correct_Questions[question_counter.Question_id].Answer_Option[1].Answer;
                             CheckBox_question_some_correct_answer_3.Content = test.Some_Correct_Questions[question_counter.Question_id].Answer_Option[2].Answer;
@@ -444,6 +534,11 @@ namespace Tests
                             CheckBox_question_some_correct_answer_6.Visibility = Visibility.Collapsed;
                             break;
                         case 5:
+                            CheckBox_question_some_correct_answer_1.Visibility = Visibility.Visible;
+                            CheckBox_question_some_correct_answer_2.Visibility = Visibility.Visible;
+                            CheckBox_question_some_correct_answer_3.Visibility = Visibility.Visible;
+                            CheckBox_question_some_correct_answer_4.Visibility = Visibility.Visible;
+                            CheckBox_question_some_correct_answer_5.Visibility = Visibility.Visible;
                             CheckBox_question_some_correct_answer_1.Content = test.Some_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
                             CheckBox_question_some_correct_answer_2.Content = test.Some_Correct_Questions[question_counter.Question_id].Answer_Option[1].Answer;
                             CheckBox_question_some_correct_answer_3.Content = test.Some_Correct_Questions[question_counter.Question_id].Answer_Option[2].Answer;
@@ -452,6 +547,12 @@ namespace Tests
                             CheckBox_question_some_correct_answer_6.Visibility = Visibility.Collapsed;
                             break;
                         case 6:
+                            CheckBox_question_some_correct_answer_1.Visibility = Visibility.Visible;
+                            CheckBox_question_some_correct_answer_2.Visibility = Visibility.Visible;
+                            CheckBox_question_some_correct_answer_3.Visibility = Visibility.Visible;
+                            CheckBox_question_some_correct_answer_4.Visibility = Visibility.Visible;
+                            CheckBox_question_some_correct_answer_5.Visibility = Visibility.Visible;
+                            CheckBox_question_some_correct_answer_6.Visibility = Visibility.Visible;
                             CheckBox_question_some_correct_answer_1.Content = test.Some_Correct_Questions[question_counter.Question_id].Answer_Option[0].Answer;
                             CheckBox_question_some_correct_answer_2.Content = test.Some_Correct_Questions[question_counter.Question_id].Answer_Option[1].Answer;
                             CheckBox_question_some_correct_answer_3.Content = test.Some_Correct_Questions[question_counter.Question_id].Answer_Option[2].Answer;
@@ -499,18 +600,13 @@ namespace Tests
                         Image_question_input_word_image.Visibility = Visibility.Visible;
                         Image_question_input_word_image.Source = new BitmapImage(new Uri(test.Input_Word_Questions[question_counter.Question_id].Picture, UriKind.Relative));
                     }
-
-                    TextBlock_question_input_word_question_1.Visibility = Visibility.Visible;
-                    TextBox_question_input_word_answer_1.Visibility = Visibility.Visible;
-                    TextBlock_question_input_word_question_2.Visibility = Visibility.Visible;
-                    TextBox_question_input_word_answer_2.Visibility = Visibility.Visible;
-                    TextBlock_question_input_word_question_3.Visibility = Visibility.Visible;
-                    TextBox_question_input_word_answer_3.Visibility = Visibility.Visible;
-                    TextBlock_question_input_word_question_4.Visibility = Visibility.Visible;
-
+                    
                     switch (test.Input_Word_Questions[question_counter.Question_id].Question.Count)
                     {
                         case 2:
+                            TextBlock_question_input_word_question_1.Visibility = Visibility.Visible;
+                            TextBox_question_input_word_answer_1.Visibility = Visibility.Visible;
+                            TextBlock_question_input_word_question_2.Visibility = Visibility.Visible;
                             TextBlock_question_input_word_question_1.Text = test.Input_Word_Questions[question_counter.Question_id].Question[0];
                             TextBlock_question_input_word_question_2.Text = test.Input_Word_Questions[question_counter.Question_id].Question[1];
                             TextBox_question_input_word_answer_2.Visibility = Visibility.Collapsed;
@@ -519,6 +615,11 @@ namespace Tests
                             TextBlock_question_input_word_question_4.Visibility = Visibility.Collapsed;
                             break;
                         case 3:
+                            TextBlock_question_input_word_question_1.Visibility = Visibility.Visible;
+                            TextBox_question_input_word_answer_1.Visibility = Visibility.Visible;
+                            TextBlock_question_input_word_question_2.Visibility = Visibility.Visible;
+                            TextBox_question_input_word_answer_2.Visibility = Visibility.Visible;
+                            TextBlock_question_input_word_question_3.Visibility = Visibility.Visible;
                             TextBlock_question_input_word_question_1.Text = test.Input_Word_Questions[question_counter.Question_id].Question[0];
                             TextBlock_question_input_word_question_2.Text = test.Input_Word_Questions[question_counter.Question_id].Question[1];
                             TextBlock_question_input_word_question_3.Text = test.Input_Word_Questions[question_counter.Question_id].Question[2];
@@ -526,6 +627,13 @@ namespace Tests
                             TextBox_question_input_word_answer_3.Visibility = Visibility.Collapsed;
                             break;
                         case 4:
+                            TextBlock_question_input_word_question_1.Visibility = Visibility.Visible;
+                            TextBox_question_input_word_answer_1.Visibility = Visibility.Visible;
+                            TextBlock_question_input_word_question_2.Visibility = Visibility.Visible;
+                            TextBox_question_input_word_answer_2.Visibility = Visibility.Visible;
+                            TextBlock_question_input_word_question_3.Visibility = Visibility.Visible;
+                            TextBox_question_input_word_answer_3.Visibility = Visibility.Visible;
+                            TextBlock_question_input_word_question_4.Visibility = Visibility.Visible;
                             TextBlock_question_input_word_question_1.Text = test.Input_Word_Questions[question_counter.Question_id].Question[0];
                             TextBlock_question_input_word_question_2.Text = test.Input_Word_Questions[question_counter.Question_id].Question[1];
                             TextBlock_question_input_word_question_3.Text = test.Input_Word_Questions[question_counter.Question_id].Question[2];
@@ -555,7 +663,147 @@ namespace Tests
                     }
                     break;
                 case 3:
-                    //todo
+                    TextBlock_question_drag_and_drop_question.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Question;
+                    if (test.Drag_And_Drop_Questions[question_counter.Question_id].Picture == "-")
+                        Image_question_drag_and_drop_image.Visibility = Visibility.Collapsed;
+                    else
+                    {
+                        Image_question_drag_and_drop_image.Visibility = Visibility.Visible;
+                        Image_question_drag_and_drop_image.Source = new BitmapImage(new Uri(test.Some_Correct_Questions[question_counter.Question_id].Picture, UriKind.Relative));
+                    }                   
+
+                    switch (test.Drag_And_Drop_Questions[question_counter.Question_id].Answer.Count)
+                    {
+                        case 2:
+                            Border_answer_drag_and_drop_1.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_1.Visibility = Visibility.Visible;
+                            Border_answer_drag_and_drop_2.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_2.Visibility = Visibility.Visible;
+                            TextBlock_answer_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Answer;
+                            TextBlock_info_question_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Question;
+                            TextBlock_answer_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Answer;
+                            TextBlock_info_question_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Question;
+                            Border_answer_drag_and_drop_3.Visibility = Visibility.Collapsed;
+                            Border_question_drag_and_drop_3.Visibility = Visibility.Collapsed;
+                            Border_answer_drag_and_drop_4.Visibility = Visibility.Collapsed;
+                            Border_question_drag_and_drop_4.Visibility = Visibility.Collapsed;
+                            Border_answer_drag_and_drop_5.Visibility = Visibility.Collapsed;
+                            Border_question_drag_and_drop_5.Visibility = Visibility.Collapsed;
+                            Border_answer_drag_and_drop_6.Visibility = Visibility.Collapsed;
+                            Border_question_drag_and_drop_6.Visibility = Visibility.Collapsed;
+                            break;
+                        case 3:
+                            Border_answer_drag_and_drop_1.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_1.Visibility = Visibility.Visible;
+                            Border_answer_drag_and_drop_2.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_2.Visibility = Visibility.Visible;
+                            Border_answer_drag_and_drop_3.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_3.Visibility = Visibility.Visible;
+                            TextBlock_answer_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Answer;
+                            TextBlock_info_question_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Question;
+                            TextBlock_answer_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Answer;
+                            TextBlock_info_question_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Question;
+                            TextBlock_answer_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[2].Answer;
+                            TextBlock_info_question_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[2].Question;
+                            Border_answer_drag_and_drop_4.Visibility = Visibility.Collapsed;
+                            Border_question_drag_and_drop_4.Visibility = Visibility.Collapsed;
+                            Border_answer_drag_and_drop_5.Visibility = Visibility.Collapsed;
+                            Border_question_drag_and_drop_5.Visibility = Visibility.Collapsed;
+                            Border_answer_drag_and_drop_6.Visibility = Visibility.Collapsed;
+                            Border_question_drag_and_drop_6.Visibility = Visibility.Collapsed;
+                            break;
+                        case 4:
+                            Border_answer_drag_and_drop_1.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_1.Visibility = Visibility.Visible;
+                            Border_answer_drag_and_drop_2.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_2.Visibility = Visibility.Visible;
+                            Border_answer_drag_and_drop_3.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_3.Visibility = Visibility.Visible;
+                            Border_answer_drag_and_drop_4.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_4.Visibility = Visibility.Visible;
+                            TextBlock_answer_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Answer;
+                            TextBlock_info_question_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Question;
+                            TextBlock_answer_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Answer;
+                            TextBlock_info_question_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Question;
+                            TextBlock_answer_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[2].Answer;
+                            TextBlock_info_question_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[2].Question;
+                            TextBlock_answer_drag_and_drop_4.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[3].Answer;
+                            TextBlock_info_question_drag_and_drop_4.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[3].Question;
+                            Border_answer_drag_and_drop_5.Visibility = Visibility.Collapsed;
+                            Border_question_drag_and_drop_5.Visibility = Visibility.Collapsed;
+                            Border_answer_drag_and_drop_6.Visibility = Visibility.Collapsed;
+                            Border_question_drag_and_drop_6.Visibility = Visibility.Collapsed;
+                            break;
+                        case 5:
+                            Border_answer_drag_and_drop_1.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_1.Visibility = Visibility.Visible;
+                            Border_answer_drag_and_drop_2.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_2.Visibility = Visibility.Visible;
+                            Border_answer_drag_and_drop_3.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_3.Visibility = Visibility.Visible;
+                            Border_answer_drag_and_drop_4.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_4.Visibility = Visibility.Visible;
+                            Border_answer_drag_and_drop_5.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_5.Visibility = Visibility.Visible;
+                            TextBlock_answer_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Answer;
+                            TextBlock_info_question_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Question;
+                            TextBlock_answer_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Answer;
+                            TextBlock_info_question_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Question;
+                            TextBlock_answer_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[2].Answer;
+                            TextBlock_info_question_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[2].Question;
+                            TextBlock_answer_drag_and_drop_4.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[3].Answer;
+                            TextBlock_info_question_drag_and_drop_4.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[3].Question;
+                            TextBlock_answer_drag_and_drop_5.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[4].Answer;
+                            TextBlock_info_question_drag_and_drop_5.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[4].Question;
+                            Border_answer_drag_and_drop_6.Visibility = Visibility.Collapsed;
+                            Border_question_drag_and_drop_6.Visibility = Visibility.Collapsed;
+                            break;
+                        case 6:
+                            Border_answer_drag_and_drop_1.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_1.Visibility = Visibility.Visible;
+                            Border_answer_drag_and_drop_2.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_2.Visibility = Visibility.Visible;
+                            Border_answer_drag_and_drop_3.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_3.Visibility = Visibility.Visible;
+                            Border_answer_drag_and_drop_4.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_4.Visibility = Visibility.Visible;
+                            Border_answer_drag_and_drop_5.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_5.Visibility = Visibility.Visible;
+                            Border_answer_drag_and_drop_6.Visibility = Visibility.Visible;
+                            Border_question_drag_and_drop_6.Visibility = Visibility.Visible;
+                            TextBlock_answer_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Answer;
+                            TextBlock_info_question_drag_and_drop_1.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[0].Question;
+                            TextBlock_answer_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Answer;
+                            TextBlock_info_question_drag_and_drop_2.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[1].Question;
+                            TextBlock_answer_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[2].Answer;
+                            TextBlock_info_question_drag_and_drop_3.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[2].Question;
+                            TextBlock_answer_drag_and_drop_4.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[3].Answer;
+                            TextBlock_info_question_drag_and_drop_4.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[3].Question;
+                            TextBlock_answer_drag_and_drop_5.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[4].Answer;
+                            TextBlock_info_question_drag_and_drop_5.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[4].Question;
+                            TextBlock_answer_drag_and_drop_6.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[5].Answer;
+                            TextBlock_info_question_drag_and_drop_6.Text = test.Drag_And_Drop_Questions[question_counter.Question_id].Answer[5].Question;
+                            break;
+                    }
+                    if (test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer != null)
+                    {
+                        //todo show old answer
+                    }
+                    if (Button_finish.IsEnabled)
+                    {
+                        if (test.Drag_And_Drop_Questions[question_counter.Question_id].Person_Answer == null)
+                            Border_question_drag_and_drop.Background = new SolidColorBrush(Colors.LightGray);
+                        else
+                            Border_question_drag_and_drop.Background = new SolidColorBrush(Colors.Fuchsia);
+                    }
+                    else
+                    {
+                        if (test.Drag_And_Drop_Questions[question_counter.Question_id].IsRight)
+                            Border_question_drag_and_drop.Background = new SolidColorBrush(Colors.LightGreen);
+                        else
+                            Border_question_drag_and_drop.Background = new SolidColorBrush(Colors.Coral);
+                    }
+
                     break;
             }
         }        
@@ -583,7 +831,12 @@ namespace Tests
             TextBox_question_input_word_answer_2.IsEnabled = false;
             TextBox_question_input_word_answer_3.IsEnabled = false;
 
-            //todo
+            TextBlock_question_drag_and_drop_1.AllowDrop = false;
+            TextBlock_question_drag_and_drop_2.AllowDrop = false;
+            TextBlock_question_drag_and_drop_3.AllowDrop = false;
+            TextBlock_question_drag_and_drop_4.AllowDrop = false;
+            TextBlock_question_drag_and_drop_5.AllowDrop = false;
+            TextBlock_question_drag_and_drop_6.AllowDrop = false;
 
             test = _test_navigation.CheckTest(test);
             int correct_answers = _test_navigation.CountCorrectAnswers(test);
@@ -746,6 +999,76 @@ namespace Tests
                     Check();
                 }
             }
+        }
+
+        #endregion
+
+        #region Drag And Drop Functions
+
+        private void TextBlock_answer_drag_and_drop_1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBlock tb = (TextBlock)sender;
+            DragDrop.DoDragDrop(tb, tb.Text, DragDropEffects.Copy);
+        }
+
+        private void TextBlock_question_drag_and_drop_1_Drop(object sender, DragEventArgs e)
+        {
+            ((TextBlock)sender).Text = (string)e.Data.GetData(DataFormats.Text);
+        }
+
+        private void TextBlock_answer_drag_and_drop_2_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBlock tb = (TextBlock)sender;
+            DragDrop.DoDragDrop(tb, tb.Text, DragDropEffects.Copy);
+        }
+
+        private void TextBlock_question_drag_and_drop_2_Drop(object sender, DragEventArgs e)
+        {
+            ((TextBlock)sender).Text = (string)e.Data.GetData(DataFormats.Text);
+        }
+
+        private void TextBlock_answer_drag_and_drop_3_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBlock tb = (TextBlock)sender;
+            DragDrop.DoDragDrop(tb, tb.Text, DragDropEffects.Copy);
+        }
+
+        private void TextBlock_question_drag_and_drop_3_Drop(object sender, DragEventArgs e)
+        {
+            ((TextBlock)sender).Text = (string)e.Data.GetData(DataFormats.Text);
+        }
+
+        private void TextBlock_answer_drag_and_drop_4_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBlock tb = (TextBlock)sender;
+            DragDrop.DoDragDrop(tb, tb.Text, DragDropEffects.Copy);
+        }
+
+        private void TextBlock_question_drag_and_drop_4_Drop(object sender, DragEventArgs e)
+        {
+            ((TextBlock)sender).Text = (string)e.Data.GetData(DataFormats.Text);
+        }
+
+        private void TextBlock_answer_drag_and_drop_5_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBlock tb = (TextBlock)sender;
+            DragDrop.DoDragDrop(tb, tb.Text, DragDropEffects.Copy);
+        }
+
+        private void TextBlock_question_drag_and_drop_5_Drop(object sender, DragEventArgs e)
+        {
+            ((TextBlock)sender).Text = (string)e.Data.GetData(DataFormats.Text);
+        }
+
+        private void TextBlock_answer_drag_and_drop_6_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBlock tb = (TextBlock)sender;
+            DragDrop.DoDragDrop(tb, tb.Text, DragDropEffects.Copy);
+        }
+
+        private void TextBlock_question_drag_and_drop_6_Drop(object sender, DragEventArgs e)
+        {
+            ((TextBlock)sender).Text = (string)e.Data.GetData(DataFormats.Text);
         }
 
         #endregion

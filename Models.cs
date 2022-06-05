@@ -14,7 +14,11 @@ namespace Tests
         public int Question_id { get; set;}
         
     }
-
+    class Answer_Сouples
+    {
+        public string Question { get; set; }
+        public string Answer { get; set; }        
+    }
     class Answer_Option
     {
         public string Answer { get; set; }
@@ -47,7 +51,11 @@ namespace Tests
     }
     class Drag_And_Drop
     {
-        //todo
+        public string Question { get; set; }
+        public string Picture { get; set; }
+        public List<Answer_Сouples> Answer { get; set; }
+        public List<string> Person_Answer { get; set; }
+        public bool IsRight { get; set; }
     }
     class Test
     {

@@ -9,7 +9,17 @@
         Icon="data\img\Tests.ico"
         Name="Window">
     <Window.Resources>
-        
+        <Style x:Key="LabelTextDAD" TargetType="Label">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="FontFamily" Value="Times New Roman"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="5,0,5,10"/>
+        </Style>
+        <Style x:Key="BorderDAD" TargetType="Border">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+        </Style>
         <Style x:Key="ButtonText" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Times New Roman"/>
             <Setter Property="FontSize" Value="20"/>
@@ -26,6 +36,14 @@
             <Setter Property="Margin" Value="0,0,0,10"/>
         </Style>
         <Style x:Key="QuestionText" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Times New Roman"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="5,0,5,10"/>
+        </Style>
+        <Style x:Key="QuestionTextDAD" TargetType="TextBlock">
+            <Setter Property="MinWidth" Value="100px"/>
+            <Setter Property="MinHeight" Value="40px"/>
             <Setter Property="FontFamily" Value="Times New Roman"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
@@ -222,30 +240,91 @@
                         <Image Style="{StaticResource Image}" Name="Image_question_input_word_image" />
                     </StackPanel>
                 </Border>
+                <!--Вопросы с перетягиванием-->
+                <Border Style="{StaticResource InfoBorder}" Name="Border_question_info_drag_and_drop">
+                    <StackPanel Style="{StaticResource NormalStackPanel}">
+                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_info_drag_and_drop"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource QuestionBorder}" Name="Border_question_drag_and_drop" >
+                    <StackPanel Style="{StaticResource NormalStackPanel}">
+                        <TextBlock Style="{StaticResource NormalText}" Name="TextBlock_question_drag_and_drop_question"/>
+                        <Image Style="{StaticResource Image}" Name="Image_question_drag_and_drop_image" />
+                        <WrapPanel>
+                            <Border Style="{StaticResource BorderDAD}" Name="Border_answer_drag_and_drop_1">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_answer_drag_and_drop_1" MouseDown="TextBlock_answer_drag_and_drop_1_MouseDown"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource BorderDAD}" Name="Border_answer_drag_and_drop_2">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_answer_drag_and_drop_2" MouseDown="TextBlock_answer_drag_and_drop_2_MouseDown"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource BorderDAD}" Name="Border_answer_drag_and_drop_3">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_answer_drag_and_drop_3" MouseDown="TextBlock_answer_drag_and_drop_3_MouseDown"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource BorderDAD}" Name="Border_answer_drag_and_drop_4">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_answer_drag_and_drop_4" MouseDown="TextBlock_answer_drag_and_drop_4_MouseDown"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource BorderDAD}" Name="Border_answer_drag_and_drop_5">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_answer_drag_and_drop_5" MouseDown="TextBlock_answer_drag_and_drop_5_MouseDown"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource BorderDAD}" Name="Border_answer_drag_and_drop_6">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_answer_drag_and_drop_6" MouseDown="TextBlock_answer_drag_and_drop_6_MouseDown"/>
+                                </StackPanel>
+                            </Border>
+                        </WrapPanel>
+                        <WrapPanel>
+                            <Border Style="{StaticResource BorderDAD}" Name="Border_question_drag_and_drop_1">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_info_question_drag_and_drop_1"/>
+                                    <TextBlock Style="{StaticResource QuestionTextDAD}" Name="TextBlock_question_drag_and_drop_1" Drop="TextBlock_question_drag_and_drop_1_Drop"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource BorderDAD}" Name="Border_question_drag_and_drop_2">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_info_question_drag_and_drop_2"/>
+                                    <TextBlock Style="{StaticResource QuestionTextDAD}" Name="TextBlock_question_drag_and_drop_2" Drop="TextBlock_question_drag_and_drop_2_Drop"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource BorderDAD}" Name="Border_question_drag_and_drop_3">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_info_question_drag_and_drop_3"/>
+                                    <TextBlock Style="{StaticResource QuestionTextDAD}" Name="TextBlock_question_drag_and_drop_3" Drop="TextBlock_question_drag_and_drop_3_Drop"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource BorderDAD}" Name="Border_question_drag_and_drop_4">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_info_question_drag_and_drop_4"/>
+                                    <TextBlock Style="{StaticResource QuestionTextDAD}" Name="TextBlock_question_drag_and_drop_4" Drop="TextBlock_question_drag_and_drop_4_Drop"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource BorderDAD}" Name="Border_question_drag_and_drop_5">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_info_question_drag_and_drop_5"/>
+                                    <TextBlock Style="{StaticResource QuestionTextDAD}" Name="TextBlock_question_drag_and_drop_5" Drop="TextBlock_question_drag_and_drop_5_Drop"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource BorderDAD}" Name="Border_question_drag_and_drop_6">
+                                <StackPanel Style="{StaticResource HorizontalPanel}">
+                                    <TextBlock Style="{StaticResource QuestionText}" Name="TextBlock_info_question_drag_and_drop_6"/>
+                                    <TextBlock Style="{StaticResource QuestionTextDAD}" Name="TextBlock_question_drag_and_drop_6" Drop="TextBlock_question_drag_and_drop_6_Drop"/>
+                                </StackPanel>
+                            </Border>
+                        </WrapPanel>
+                    </StackPanel>
+                </Border>
                 <!--Нижняя навигационная панель-->
                 <Border Style="{StaticResource NavidationBorder}" Name="Border_question_navidation">
                     <StackPanel Style="{StaticResource NormalStackPanel}">
-                        <!--<Grid ShowGridLines="False">
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource HorizontalButton}" Name="Button_left" Click="Button_left_Click">
-                                <StackPanel Style="{StaticResource HorizontalPanel}">
-                                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource IconLeft}"/>
-                                    <TextBlock Style="{StaticResource ButtonText}" Name="TextBlock_left"/>
-                                </StackPanel>
-                            </Button>
-                            <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource HorizontalButton}" Name="Button_right" Click="Button_right_Click">
-                                <StackPanel Style="{StaticResource HorizontalPanel}">
-                                    <TextBlock Style="{StaticResource ButtonText}" Name="TextBlock_right"/>
-                                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource IconRight}"/>
-                                </StackPanel>
-                            </Button>
-                        </Grid>-->
                         <WrapPanel>
                             <Button Style="{StaticResource HorizontalButton}" Name="Button_left" Click="Button_left_Click">
                                 <StackPanel Style="{StaticResource HorizontalPanel}">
@@ -272,6 +351,14 @@
                     <ComboBox Style="{StaticResource NormalComboBox}" Name="ComboBox_test_choose" SelectionChanged="ComboBox_test_choose_Selected"></ComboBox>
                 </StackPanel>
             </Border>
+            <!--Тест-->
+            <Canvas>
+                <TextBlock Name="lbl2" Canvas.Top="100" Canvas.Left="30" Padding="10" MouseDown="lbl1_MouseDown">Всем пока (</TextBlock>
+                <TextBlock Name="lbl1" Canvas.Top="40" Canvas.Left="30" Padding="10" MouseDown="lbl1_MouseDown">Всем привет!</TextBlock>
+                <Border Canvas.Top="75" Canvas.Left="250" BorderBrush="Black" BorderThickness="2">
+                    <TextBlock MinWidth="100" MinHeight="30" FontSize="16" Name="txtTarget" AllowDrop="True" Drop="txtTarget_Drop"></TextBlock>
+                </Border>
+            </Canvas>
         </StackPanel>
 
 

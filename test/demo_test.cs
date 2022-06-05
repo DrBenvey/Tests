@@ -13,7 +13,7 @@ namespace Tests.test
             test.One_Correct_Questions = GetDemoOneCorrectQuestions();
             test.Some_Correct_Questions = GetDemoSomeCorrectQuestions();
             test.Input_Word_Questions = GetDemoInputWordQuestions();
-            test.Drag_And_Drop_Questions = new List<Drag_And_Drop>();
+            test.Drag_And_Drop_Questions = GetDemoDragAndDropQuestions();
             return test;
         }
         
@@ -145,6 +145,62 @@ namespace Tests.test
             q3.Answer = new List<string> { "3", "9", "5" };
             one_Corrects.Add(q3);
             return one_Corrects;
+        }
+
+        public List<Drag_And_Drop> GetDemoDragAndDropQuestions()
+        {
+            List<Drag_And_Drop> drag_And_Drop=new List<Drag_And_Drop>();
+            Drag_And_Drop q1=new Drag_And_Drop();
+            q1.Question = "Сопоставьте животных и произносимые ими звуки";
+            q1.Picture= "/Tests;component/data/pic/демонстрационный_4_2.jpg";
+            q1.Answer = new List<Answer_Сouples>{
+                new Answer_Сouples() {Question="Кот говорит",Answer="Мяу"},
+                new Answer_Сouples() {Question="Пес говорт",Answer="Гав" }
+            };
+            drag_And_Drop.Add(q1);
+            Drag_And_Drop q2 = new Drag_And_Drop();
+            q2.Question = "Сопоставьте математические операции и их названия";
+            q2.Picture = "-";
+            q2.Answer = new List<Answer_Сouples>{
+                new Answer_Сouples() {Question="*",Answer="Умножить"},
+                new Answer_Сouples() {Question="+",Answer="Сложить" },
+                new Answer_Сouples() {Question="-",Answer="Отнять" }
+            };
+            drag_And_Drop.Add(q2);
+            Drag_And_Drop q3 = new Drag_And_Drop();
+            q3.Question = "Сопоставьте страны и языки на которых они говорят";
+            q3.Picture = "-";
+            q3.Answer = new List<Answer_Сouples>{
+                new Answer_Сouples() {Question="Россия",Answer="Русский"},
+                new Answer_Сouples() {Question="Франция",Answer="Французский" },
+                new Answer_Сouples() {Question="Германия",Answer="Немецкий" },
+                new Answer_Сouples() {Question="Польша",Answer="Польский" }
+            };
+            drag_And_Drop.Add(q3);
+            Drag_And_Drop q4 = new Drag_And_Drop();
+            q4.Question = "Сопоставьте выражения и их значения";
+            q4.Picture = "-";
+            q4.Answer = new List<Answer_Сouples>{
+                new Answer_Сouples() {Question="1+1=",Answer="2"},
+                new Answer_Сouples() {Question="1-4=",Answer="-3" },
+                new Answer_Сouples() {Question="0+2=",Answer="2" },
+                new Answer_Сouples() {Question="1+9=",Answer="10" },
+                new Answer_Сouples() {Question="1+7=",Answer="8" }
+            };
+            drag_And_Drop.Add(q4);
+            Drag_And_Drop q5 = new Drag_And_Drop();
+            q5.Question = "Сопоставьте род занятий и названия женщин, которые этим занимаются";
+            q5.Picture = "-";
+            q5.Answer = new List<Answer_Сouples>{
+                new Answer_Сouples() {Question="психология",Answer="психлогиня"},
+                new Answer_Сouples() {Question="математика",Answer="математикиня" },
+                new Answer_Сouples() {Question="медицина",Answer="докторица" },
+                new Answer_Сouples() {Question="библиотека",Answer="библиотекарка" },
+                new Answer_Сouples() {Question="книга",Answer="авторка" },
+                new Answer_Сouples() {Question="прическа",Answer="парикмахерка" }
+            };
+            drag_And_Drop.Add(q5);
+            return drag_And_Drop;
         }
     }
 }
